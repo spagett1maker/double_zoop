@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import { ChevronDown, ChevronRight, Search } from "lucide-react"
 import { propertyService } from "@/app/api/get-properties"
 import { type House, HouseCard } from "@/components/ui/card"

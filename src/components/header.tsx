@@ -26,7 +26,7 @@ export default function Header() {
         <div className="flex items-center">
           <Link href="/" className="mr-8 cursor-pointer">
             <p className="text-2xl font-bold">
-              <span className="text-orange-500">Beaver</span>'s House
+              <span className="text-orange-500">Beaver</span>&apos;s House
             </p>
           </Link>
           

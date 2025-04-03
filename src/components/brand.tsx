@@ -30,9 +30,9 @@ export default function BrandAboutSection() {
 
             {/* Subheading with styled quotes - now horizontal */}
             <div className="flex flex-wrap items-center mb-12">
-              <span className="text-orange-500 text-3xl font-serif">"</span>
+              <span className="text-orange-500 text-3xl font-serif">{'"'}</span>
               <h2 className="text-2xl md:text-3xl font-medium px-2">비버의 집</h2>
-              <span className="text-orange-500 text-3xl font-serif">"</span>
+              <span className="text-orange-500 text-3xl font-serif">{'"'}</span>
               <h2 className="text-2xl md:text-3xl font-medium px-2">과 함께라면</h2>
             </div>
 

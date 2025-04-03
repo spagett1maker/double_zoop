@@ -16,7 +16,7 @@ export default function Footer() {
               href="/contact"
               className="inline-flex items-center text-white bg-orange-500 rounded-full px-6 py-3 font-medium transition-colors"
             >
-              Let's talk
+              Let&apos;s talk
               <ArrowUpRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
@@ -74,7 +74,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-gray-200 text-sm flex justify-between">
-          <p>&copy; {new Date().getFullYear()} Beaver's House. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Beaver&apos;s House. All rights reserved.</p>
           <div>
             hi
           </div>
