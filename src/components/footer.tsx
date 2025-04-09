@@ -3,15 +3,16 @@ import { ArrowUpRight } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className=" py-16 px-6 md:px-12 lg:px-16 bg-gray-50">
+    <footer className=" py-12 px-6 md:px-12 lg:px-16 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           {/* Left section */}
           <div className="md:col-span-6">
             <p className="text-sm mb-3">Contact</p>
-            <h2 className="text-4xl md:text-5xl font-semibold leading-tight mb-8">
+            <h2 className="text-4xl md:text-5xl font-semibold leading-tight mb-2">
               <span className="text-orange-500">Beaver&apos;</span>s House
             </h2>
+            <p className="text-sm text-gray-700 mb-10">비버의 집, 안심전세 매물만 취급하는 전세전문 플랫폼</p>
             <Link
               href="/contact"
               className="inline-flex items-center text-white bg-orange-500 rounded-full px-6 py-3 font-medium transition-colors"
@@ -23,7 +24,7 @@ export default function Footer() {
 
           {/* Middle section - Navigation */}
           <div className="md:col-span-3">
-            <ul className="space-y-4">
+            <ul className="space-y-4 text-sm">
               <li>
                 <Link href="/" className="hover:underline underline-offset-4">
                   집 보러가기
@@ -48,7 +49,7 @@ export default function Footer() {
           </div>
 
           {/* Right section - App & Social */}
-          <div className="md:col-span-3">
+          <div className="md:col-span-3 text-sm">
             <div className="mb-8">
               <p className="font-medium mb-4">Download Our App</p>
               <div className="space-y-3">
@@ -73,7 +74,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-gray-200 text-sm flex justify-between">
+        <div className="mt-12 pt-8 border-t border-gray-200 text-sm flex justify-between">
           <p>&copy; {new Date().getFullYear()} Beaver&apos;s House. All rights reserved.</p>
           <div>
             hi

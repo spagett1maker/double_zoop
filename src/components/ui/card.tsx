@@ -63,12 +63,12 @@ export function HouseCard({ house }: { house: House }) {
         <div className="flex gap-2 py-[2px]">
           {house.safety_tag && (
             <div className="flex items-center gap-1 text-[12px] bg-[#e7f9f3] text-[#068C6D] font-medium rounded-lg py-1 px-2">
-              <House className="w-4 h-4 text-[#068C6D]" /> 안정 검증 완료
+              <House className="w-4 h-4 text-[#068C6D]" /> 안전 검증
             </div>
           )}
           {house.guarantee_tag && (
             <div className="flex items-center gap-1 text-[12px] bg-[#ffddc8] text-[#f37021] font-medium rounded-lg py-1 px-2">
-              <House className="w-4 h-4 text-[#f37021]" /> 보증보험 가입 가능
+              <House className="w-4 h-4 text-[#f37021]" /> 보증보험 가입
             </div>
           )}
         </div>
