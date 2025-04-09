@@ -1,8 +1,4 @@
 
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-
-import { HouseCard } from "@/components/ui/card";
 import QASection from "@/components/qa";
 import Blog from "@/components/blog";
 import BrandAboutSection from "@/components/brand";
