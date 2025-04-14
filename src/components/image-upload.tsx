@@ -14,6 +14,10 @@ type ImageUploadProps = {
   label?: string
 }
 
+export type UploadedImageWithUrl = UploadedImage & {
+  url: string
+}
+
 export default function ImageUpload({ images, setImages, maxFiles = 10, label = "Upload images" }: ImageUploadProps) {
   const [rejectedFiles, setRejectedFiles] = useState<FileRejection[]>([])
 
