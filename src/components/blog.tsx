@@ -3,8 +3,8 @@ import Image from 'next/image'
 
 export default function Blog() {
   return (
-    <section className='w-full mx-auto max-w-[1280px] pt-[50px] pb-[50px]/'>
-      <h2 className="text-4xl font-bold text-center text-gray-900 mb-[60px]">
+    <section className='w-full mx-auto px-6 sm:px-0 max-w-[1280px] pt-[50px] pb-[50px]/'>
+      <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-[32px] sm:mb-[60px]">
         <span className='text-orange-500'>Articles</span> and Blog
       </h2>
 

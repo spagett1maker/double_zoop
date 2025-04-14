@@ -38,12 +38,12 @@ export default function FAQSection() {
   }
 
   return (
-    <section className="py-24 ">
+    <section className="py-16 pb-24 sm:py-24 px-6 sm:px-0">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col justify-center items-center">
           {/* Left column */}
-          <div className="mb-16">
-            <h2 className="text-4xl font-bold">
+          <div className="mb-8 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold">
               <span className="text-black">FAQ</span>
             </h2>
           </div>
@@ -55,7 +55,7 @@ export default function FAQSection() {
                 <div key={item.id} className="rounded-2xl bg-gray-50 overflow-hidden">
                   <button
                     onClick={() => toggleItem(item.id)}
-                    className="w-full py-5 px-6 flex items-center justify-between text-left text-lg font-medium"
+                    className="w-full py-5 px-6 flex items-center justify-between text-left text-base sm:text-lg font-medium"
                     aria-expanded={openItem === item.id}
                     aria-controls={`content-${item.id}`}
                   >

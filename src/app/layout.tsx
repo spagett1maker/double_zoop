@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import { AuthProvider } from "../contexts/auth-context";
+import ChannelService from "@/components/channel-talk";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,6 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const mockUser = {
+  id: "user_abc123",
+  name: "홍길동",
+  email: "hong@example.com",
+  phoneNumber: "01012345678"
+}
 
 export const metadata: Metadata = {
   title: "Beaver's House | 안전한 전세, 비버가 찾아드립니다",
@@ -31,9 +37,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        {children}
-        <Footer />
+        <AuthProvider>
+          {children}
+          <ChannelService user={mockUser}/>
+
+        </AuthProvider>
       </body>
     </html>
   );

@@ -3,19 +3,19 @@ import { ArrowUpRight } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className=" py-12 px-6 md:px-12 lg:px-16 bg-gray-50">
+    <footer className="py-10 sm:py-12 px-4 sm:px-6 md:px-12 lg:px-16 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 md:gap-8">
           {/* Left section */}
-          <div className="md:col-span-6">
+          <div className="sm:col-span-2 md:col-span-5">
             <p className="text-sm mb-3">Contact</p>
-            <h2 className="text-4xl md:text-5xl font-semibold leading-tight mb-2">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight mb-2">
               <span className="text-orange-500">Beaver&apos;</span>s House
             </h2>
-            <p className="text-sm text-gray-700 mb-10">비버의 집, 안심전세 매물만 취급하는 전세전문 플랫폼</p>
+            <p className="text-sm text-gray-700 mb-6 sm:mb-10">비버의 집, 안심전세 매물만 취급하는 전세전문 플랫폼</p>
             <Link
               href="/contact"
-              className="inline-flex items-center text-white bg-orange-500 rounded-full px-6 py-3 font-medium transition-colors"
+              className="inline-flex items-center text-white bg-orange-500 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 font-medium transition-colors hover:bg-orange-600 active:bg-orange-700"
             >
               Let&apos;s talk
               <ArrowUpRight className="ml-2 h-4 w-4" />
@@ -23,46 +23,47 @@ export default function Footer() {
           </div>
 
           {/* Middle section - Navigation */}
-          <div className="md:col-span-3">
-            <ul className="space-y-4 text-sm">
+          <div className="sm:col-span-1 md:col-span-2 mt-8 sm:mt-0">
+            <p className="font-medium mb-4 text-sm">Navigation</p>
+            <ul className="space-y-3 sm:space-y-4 text-sm">
               <li>
-                <Link href="/" className="hover:underline underline-offset-4">
+                <Link href="/" className="hover:underline underline-offset-4 inline-block py-1">
                   집 보러가기
                 </Link>
               </li>
               <li>
-                <Link href="/listings" className="hover:underline underline-offset-4">
+                <Link href="/listings" className="hover:underline underline-offset-4 inline-block py-1">
                   서비스 소개
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:underline underline-offset-4">
+                <Link href="/about" className="hover:underline underline-offset-4 inline-block py-1">
                   문의하기
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:underline underline-offset-4">
+                <Link href="/contact" className="hover:underline underline-offset-4 inline-block py-1">
                   로그인
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Right section - App & Social */}
-          <div className="md:col-span-3 text-sm">
-            <div className="mb-8">
+          {/* Right section - App & Company Info */}
+          <div className="sm:col-span-1 md:col-span-5 text-sm mt-8 sm:mt-0">
+            <div className="mb-6">
               <p className="font-medium mb-4">Download Our App</p>
-              <div className="space-y-3">
+              <div className="flex gap-4">
                 <Link
                   href="#"
-                  className="flex items-center justify-between border border-gray-200 rounded-lg p-3 hover:bg-gray-100 transition-colors"
+                  className="w-full flex items-center justify-between border border-gray-200 rounded-lg p-3 hover:bg-gray-100 transition-colors active:bg-gray-200"
                 >
                   <span>App Store</span>
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="#"
-                  className="flex items-center justify-between border border-gray-200 rounded-lg p-3 hover:bg-gray-100 transition-colors"
+                  className="w-full flex items-center justify-between border border-gray-200 rounded-lg p-3 hover:bg-gray-100 transition-colors active:bg-gray-200"
                 >
                   <span>Google Play</span>
                   <ArrowUpRight className="h-4 w-4" />
@@ -70,18 +71,48 @@ export default function Footer() {
               </div>
             </div>
 
-            
+            {/* Company Information */}
+            <div className="text-xs text-gray-500">
+              <p className="font-medium text-sm text-gray-900 mb-3">Company Information</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <p>업체명: KA한국자산관리</p>
+                  <p>대표자 성명: 박준영</p>
+                  <p>사업자 번호: 141-07-02875</p>
+                  <p>통신판매업 신고번호: -</p>
+                </div>
+                <div className="space-y-1">
+                  <p>사업장 소재지 주소: 경기도 용인시 수지구 만현로</p>
+                  <p>전화번호: 010-3593-9747</p>
+                  <p>
+                    이메일:{" "}
+                    <a href="mailto:kaownhouse@gmail.com" className="hover:underline">
+                      kaownhouse@gmail.com
+                    </a>
+                  </p>
+                </div>
+              </div>
+              
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-200 text-sm flex justify-between">
+        {/* Copyright and Terms */}
+        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200 text-xs sm:text-sm flex flex-col sm:flex-row justify-between gap-4">
           <p>&copy; {new Date().getFullYear()} Beaver&apos;s House. All rights reserved.</p>
-          <div>
-            hi
+          <div className="flex flex-wrap gap-4">
+            <Link href="/terms" className="hover:underline underline-offset-2">
+              이용약관
+            </Link>
+            <Link href="/privacy" className="hover:underline underline-offset-2">
+              개인정보처리방침
+            </Link>
+            <Link href="/marketing" className="hover:underline underline-offset-2">
+              마케팅 수신동의
+            </Link>
           </div>
         </div>
       </div>
     </footer>
   )
 }
-

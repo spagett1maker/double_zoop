@@ -3,11 +3,15 @@ import QASection from "@/components/qa";
 import Blog from "@/components/blog";
 import BrandAboutSection from "@/components/brand";
 import CTASectionWithImage from "@/components/cta";
-import BrandSection from "@/components/collabo";
-
+import CollaboSection from "@/components/collabo";
+import Headers from "@/components/header";
+import Footer from "@/components/footer";
+import HeroSection from "@/components/hero";
 
 export default function Service() {
   return (
+    <>
+    <Headers />
     <div>
       {/* <div className="pt-16 pb-4 min-h-auto max-w-[1280px] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 p-12">
@@ -24,12 +28,16 @@ export default function Service() {
           </Link>
         </div>
       </div> */}
+      <HeroSection />
+      <CollaboSection />
 
       <BrandAboutSection />
-      <BrandSection />
       <Blog />
       <QASection />
       <CTASectionWithImage />
     </div>
+    <Footer />
+    </>
+
   );
 }

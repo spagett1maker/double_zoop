@@ -46,7 +46,7 @@ export function formatRelativeTime(date: Date): string {
 
 export function HouseCard({ house }: { house: House }) {
   return (
-    <Link href="/" className="flex flex-col overflow-hidden gap-3 cursor-pointer mb-6">
+    <Link href={`/${house.id}`} className="flex flex-col overflow-hidden gap-3 cursor-pointer mb-6">
       <div className="relative aspect-6/5">
         <Image src={house.imageUrl || "/placeholder.svg"} alt={house.category} fill className="object-cover rounded-lg" />
       </div>
