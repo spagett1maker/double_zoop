@@ -1,7 +1,9 @@
+
+
 "use client"
 
-import { useState, useCallback } from "react"
-import { useDropzone, DropEvent, FileRejection } from "react-dropzone"
+import { useState, useCallback, Dispatch, SetStateAction } from "react"
+import { useDropzone, type FileRejection } from "react-dropzone"
 
 export type UploadedImage = File & {
   preview: string
@@ -9,7 +11,8 @@ export type UploadedImage = File & {
 
 type ImageUploadProps = {
   images: UploadedImage[]
-  setImages: (images: UploadedImage[]) => void
+  //setImages: (images: UploadedImage[]) => void
+  setImages: Dispatch<SetStateAction<UploadedImage[]>>
   maxFiles?: number
   label?: string
 }
@@ -22,13 +25,14 @@ export default function ImageUpload({ images, setImages, maxFiles = 10, label = 
   const [rejectedFiles, setRejectedFiles] = useState<FileRejection[]>([])
 
   const onDrop = useCallback(
-    (acceptedFiles: File[], rejectedFiles: FileRejection[], _event: DropEvent) => {
+    (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
       if (acceptedFiles?.length) {
         // Convert files to objects with preview URLs
-        const newImages = acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          }),
+        const newImages = acceptedFiles.map(
+          (file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            }) as UploadedImage,
         )
 
         // If we're only allowing one file, replace the current images

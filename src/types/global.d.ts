@@ -47,7 +47,19 @@ declare global {
   }
 
   interface Window {
-    kakao: typeof kakao
+    // ✅ kakao 타입은 maps 속성을 가진 객체로 선언 + 확장 가능성 포함
+    kakao: {
+      maps: any
+      [key: string]: any // 다른 속성들 (services, clusterer 등)도 허용
+    }
+
+    // ✅ channel.io 관련 선언도 같이 안전하게 병합
+    ChannelIO?: ((...args: any[]) => void) & {
+      q?: any[]
+      c?: (args: any) => void
+    }
+
+    ChannelIOInitialized?: boolean
   }
 
   const kakao: {

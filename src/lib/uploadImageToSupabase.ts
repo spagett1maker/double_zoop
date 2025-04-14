@@ -1,3 +1,5 @@
+import { supabase } from "@/lib/supabase-client"
+import type { UploadedImage, UploadedImageWithUrl } from "@/components/image-upload"
 
 export const uploadImagesToSupabase = async (
   images: UploadedImage[],

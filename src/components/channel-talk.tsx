@@ -1,65 +1,4 @@
 
-// "use client"
-
-// import { useEffect } from "react"
-
-// export default function ChannelService() {
-//   useEffect(() => {
-//     const w = window as any
-
-//     if (w.ChannelIO) {
-//       console.warn("ChannelIO already initialized")
-//       return
-//     }
-
-//     // ✅ 타입 명시
-//     type ChannelInitFn = {
-//       (...args: any[]): void
-//       q?: any[]
-//       c?: (args: any) => void
-//     }
-
-//     const ch: ChannelInitFn = function (...args: any[]) {
-//       ch.c!(args)
-//     }
-
-//     ch.q = []
-//     ch.c = function (args: any) {
-//       ch.q!.push(args)
-//     }
-
-//     w.ChannelIO = ch
-
-//     function loadScript() {
-//       if (w.ChannelIOInitialized) return
-//       w.ChannelIOInitialized = true
-//       const s = document.createElement("script")
-//       s.type = "text/javascript"
-//       s.async = true
-//       s.src = "https://cdn.channel.io/plugin/ch-plugin-web.js"
-//       const x = document.getElementsByTagName("script")[0]
-//       x?.parentNode?.insertBefore(s, x)
-//     }
-
-//     if (document.readyState === "complete") {
-//       loadScript()
-//     } else {
-//       window.addEventListener("DOMContentLoaded", loadScript)
-//       window.addEventListener("load", loadScript)
-//     }
-
-//     // boot 실행
-//     w.ChannelIO("boot", {
-//       pluginKey: "e7ebc6e0-9e37-4d7e-aa33-b20a04dd6fd5",
-//     })
-
-//     return () => {
-//       w.ChannelIO?.("shutdown")
-//     }
-//   }, [])
-
-//   return null
-// }
 "use client"
 
 import { useEffect } from "react"
@@ -76,14 +15,17 @@ interface ChannelServiceProps {
   user?: ChannelUser
 }
 
-type ChannelInitFn = ((...args: any[]) => void) & {
+// Replace the ChannelIOType interface and global declaration with:
+
+// Extend the base function type that's already declared elsewhere
+type ChannelIOType = ((...args: any[]) => void) & {
   q?: any[]
   c?: (args: any) => void
 }
 
+// Extend Window interface without redeclaring ChannelIO
 declare global {
   interface Window {
-    ChannelIO?: ChannelInitFn
     ChannelIOInitialized?: boolean
   }
 }
@@ -91,7 +33,7 @@ declare global {
 export default function ChannelService({ user }: ChannelServiceProps) {
   useEffect(() => {
     if (typeof window === "undefined") return
-    const w = window
+    const w = window as Window & typeof globalThis
 
     // 중복 초기화 방지
     if (w.ChannelIO) {
@@ -100,12 +42,16 @@ export default function ChannelService({ user }: ChannelServiceProps) {
     }
 
     // ChannelIO 초기 정의
-    const ch: ChannelInitFn = function (...args: any[]) {
-      ch.c?.(args)
+    const ch: ChannelIOType = (...args: any[]) => {
+      if (ch.c) {
+        ch.c(args)
+      }
     }
     ch.q = []
-    ch.c = function (args: any) {
-      ch.q?.push(args)
+    ch.c = (args: any) => {
+      if (ch.q) {
+        ch.q.push(args)
+      }
     }
 
     w.ChannelIO = ch
@@ -120,7 +66,9 @@ export default function ChannelService({ user }: ChannelServiceProps) {
       s.async = true
       s.src = "https://cdn.channel.io/plugin/ch-plugin-web.js"
       const x = document.getElementsByTagName("script")[0]
-      x?.parentNode?.insertBefore(s, x)
+      if (x?.parentNode) {
+        x.parentNode.insertBefore(s, x)
+      }
     }
 
     if (document.readyState === "complete") {
@@ -134,7 +82,9 @@ export default function ChannelService({ user }: ChannelServiceProps) {
     w.ChannelIO("boot", getChannelBootOption(user))
 
     return () => {
-      w.ChannelIO?.("shutdown")
+      if (w.ChannelIO) {
+        w.ChannelIO("shutdown")
+      }
     }
   }, [user])
 

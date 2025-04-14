@@ -7,12 +7,6 @@ interface KakaoMapProps {
   address: string
 }
 
-declare global {
-  interface Window {
-    kakao: any
-  }
-}
-
 export default function KakaoMap({ address }: KakaoMapProps) {
   const mapRef = useRef<HTMLDivElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -20,7 +14,9 @@ export default function KakaoMap({ address }: KakaoMapProps) {
   useEffect(() => {
     if (!isLoaded || typeof window === "undefined") return
 
-    window.kakao.maps.load(() => {
+    const kakao = (window as any).kakao
+
+    kakao.maps.load(() => {
       const container = mapRef.current
       if (!container) return
 
