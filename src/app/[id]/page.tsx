@@ -14,15 +14,15 @@ export default function House() {
   // const id = params.id;
 
   const [imageIndex, setImageIndex] = useState(0)
-  const images = ["/brand1.png", "/brand2.jpg", "/brand3.png"]
+  const images = ["/house1.png", "/house2.png", "/house3.png"]
 
   return (
     <>
       <Header />
       <div className="h-16"></div>
-      <div className="max-w-7xl mx-auto px-4 py-6 mb-12 font-sans">
+      <div className="max-w-7xl mx-auto px-7 py-6 mb-12 font-sans">
         {/* Breadcrumb */}
-        <div className="flex items-center text-sm text-gray-500 mb-4">
+        <div className="flex items-center text-xs sm:text-sm text-gray-500 mb-4">
           <span>홈</span>
           <ChevronRight className="w-3 h-3 mx-1" />
           <span>부동산</span>
@@ -33,7 +33,7 @@ export default function House() {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Left column - Image */}
           <div className="lg:w-1/2 relative">
-            <div className="relative h-[500px] bg-gray-100 rounded-lg overflow-hidden">
+            <div className="relative h-[300px] sm:h-[500px] bg-gray-100 rounded-lg overflow-hidden">
               <Image src={images[imageIndex] || "/placeholder.svg"} alt="Property image" fill className="object-fit" />
               {/* <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs">
                 1/7 전체보기
@@ -47,17 +47,17 @@ export default function House() {
             </div>
 
             <div className="mt-4 flex items-center">
-              <div className="w-12 h-12 rounded-full overflow-hidden relative bg-orange-100">
+              <div className="w-9 sm:w-12 h-9 sm:h-12 rounded-full overflow-hidden relative bg-orange-100">
                 
               </div>
               <div className="ml-3">
                 <div className="font-medium">송준하</div>
-                <div className="text-sm text-gray-500">역삼동</div>
+                <div className="text-sm sm:text-sm text-gray-500">역삼동</div>
               </div>
             </div>
 
             {/* Safety Check Section */}
-            <div className="mt-4 border-t border-gray-200 pt-4">
+            <div className="mt-4 border-t border-gray-200 pt-4 pb-6 sm:pb-0">
               <h2 className="text-lg font-bold mb-2">이 집의 위험요소</h2>
               <p className="text-sm text-gray-600 mb-4">처음 이 집을 살펴볼때 우리 위험확인 주의사항만 가져왔어요</p>
 
@@ -156,7 +156,7 @@ export default function House() {
                   </tr>
                   <tr className="border-b border-gray-100">
                     <td className="py-2 text-gray-500">전용면적</td>
-                    <td className="py-2 font-medium">전용 31.4m² · 10평</td>
+                    <td className="py-2 font-medium">전용 84.5m² · 25.6평</td>
                   </tr>
                   <tr className="border-b border-gray-100">
                     <td className="py-2 text-gray-500">방/욕실 수</td>
@@ -222,11 +222,11 @@ export default function House() {
               </div>
             </div> */}
 
-            <MapWithMarker address="서울특별시 강남구 삼성로 119길 19" />
+            <MapWithMarker address="서울특별시 강남구 학동로 426 (삼성동)" />
             
 
             <div className="mt-4 text-sm">
-              <p>서울특별시 강남구 봉은사로73길 44 (삼성동) 삼성중앙역 도보7분</p>
+              <p>서울특별시 강남구 학동로 426 (삼성동), 본관, 제1,2,3별관</p>
             </div>
             
 

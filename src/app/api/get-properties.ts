@@ -43,7 +43,7 @@ const mockProperties: PropertyListing[] = [
     },
     size: {
       pyeong: 25.6,
-      squareMeters: 170.5,
+      squareMeters: 84.5,
     },
     floor: 12,
     address: {
@@ -58,7 +58,7 @@ const mockProperties: PropertyListing[] = [
     likes: 5,
     views: 120,
     chats: 3,
-    images: ["/1.jpg"],
+    images: ["/house1.png"],
   },
 ]
 
