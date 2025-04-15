@@ -32,17 +32,17 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/listings" className="hover:underline underline-offset-4 inline-block py-1">
+                <Link href="/service" className="hover:underline underline-offset-4 inline-block py-1">
                   서비스 소개
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:underline underline-offset-4 inline-block py-1">
+                <Link href="/https://de7j3.channel.io/home" className="hover:underline underline-offset-4 inline-block py-1">
                   문의하기
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:underline underline-offset-4 inline-block py-1">
+                <Link href="/login" className="hover:underline underline-offset-4 inline-block py-1">
                   로그인
                 </Link>
               </li>
