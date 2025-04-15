@@ -36,7 +36,7 @@ interface ChannelBootOption {
 
 export const getChannelBootOption = (user?: ChannelUser): ChannelBootOption => {
   const bootOption: ChannelBootOption = {
-    pluginKey: process.env.NEXT_PUBLIC_CHANNEL_IO_PLUGIN_KEY || "", // Use environment variable
+    pluginKey: process.env.NEXT_PUBLIC_CHANNEL_PLUGIN_KEY || "", // Use environment variable
   }
 
   if (user) {

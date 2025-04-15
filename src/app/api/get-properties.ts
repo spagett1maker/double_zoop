@@ -61,56 +61,6 @@ const mockProperties: PropertyListing[] = [
     chats: 3,
     images: ["/1.jpg"],
   },
-  {
-    id: "2",
-    type: "투룸",
-    dealType: "전세",
-    price: {
-      deposit: 3.7,
-    },
-    size: {
-      pyeong: 7.8,
-    },
-    floor: 3,
-    address: {
-      region: "서울",
-      district: "논현",
-      detail: "논현동 중심가",
-    },
-    managementFee: 10,
-    isVerified: false,
-    hasInsurance: true,
-    postedDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // 1개월 전
-    likes: 4,
-    views: 95,
-    chats: 2,
-    images: ["/1.jpg"],
-  },
-  {
-    id: "3",
-    type: "투룸",
-    dealType: "전세",
-    price: {
-      deposit: 3.8,
-    },
-    size: {
-      pyeong: 16.0,
-    },
-    floor: 3,
-    address: {
-      region: "서울",
-      district: "삼성",
-      detail: "삼성동 아파트 단지 인근",
-    },
-    managementFee: 13,
-    isVerified: true,
-    hasInsurance: false,
-    postedDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // 1개월 전
-    likes: 19,
-    views: 210,
-    chats: 8,
-    images: ["/1.jpg"],
-  },
 ]
 
 // Convert PropertyListing to House format

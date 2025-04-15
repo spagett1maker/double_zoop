@@ -27,7 +27,7 @@ export default function House() {
           <ChevronRight className="w-3 h-3 mx-1" />
           <span>부동산</span>
           <ChevronRight className="w-3 h-3 mx-1" />
-          <span className="text-gray-700">오르평 월세 5,000원/45만원 - 삼성동역 도보7분 | 한국부동산</span>
+          <span className="text-gray-700">비버 전세 18,000만원 - 삼성동역 도보7분 | 집주인</span>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-6">
@@ -47,12 +47,12 @@ export default function House() {
             </div>
 
             <div className="mt-4 flex items-center">
-              <div className="w-12 h-12 rounded-full overflow-hidden relative">
-                <Image src="/placeholder.svg" alt="Agent" fill className="object-cover" />
+              <div className="w-12 h-12 rounded-full overflow-hidden relative bg-orange-100">
+                
               </div>
               <div className="ml-3">
-                <div className="font-medium">내외부동산중개사무소</div>
-                <div className="text-sm text-gray-500">심성동</div>
+                <div className="font-medium">송준하</div>
+                <div className="text-sm text-gray-500">역삼동</div>
               </div>
             </div>
 
@@ -134,11 +134,11 @@ export default function House() {
 
           {/* Right column - Details */}
           <div className="lg:w-1/2">
-            <div className="text-sm text-gray-500 mb-1">공인중개사 · 오르평 월세</div>
+            <div className="text-sm text-gray-500 mb-1">집주인</div>
 
             <div className="mb-2">
               <h1 className="text-2xl font-bold">
-                <span className="text-orange-500">판매중</span> 전세 1,700만원
+                <span className="text-orange-500">판매중</span> 전세 1,800만원 (예시)
               </h1>
               <p className="text-gray-600 mt-1">2개월 전 작성</p>
             </div>
@@ -152,7 +152,7 @@ export default function House() {
                   </tr>
                   <tr className="border-b border-gray-100">
                     <td className="py-2 text-gray-500">건축물 용도</td>
-                    <td className="py-2 font-medium">단독주택</td>
+                    <td className="py-2 font-medium">공동주택</td>
                   </tr>
                   <tr className="border-b border-gray-100">
                     <td className="py-2 text-gray-500">전용면적</td>
@@ -232,27 +232,27 @@ export default function House() {
 
             <div className="mt-8">
               <h2 className="text-lg font-bold mb-4">공인중개사 정보</h2>
-              <table className="w-full text-sm">
+              <table className="w-full text-sm text-gray-500">
                 <tbody>
                   <tr className="border-b border-gray-100">
                     <td className="py-2 text-gray-500 w-1/3">중개소</td>
-                    <td className="py-2 font-medium">내외부동산중개사무소</td>
+                    <td className="py-2 font-medium">-</td>
                   </tr>
                   <tr className="border-b border-gray-100">
                     <td className="py-2 text-gray-500">대표</td>
-                    <td className="py-2 font-medium">한원우</td>
+                    <td className="py-2 font-medium">-</td>
                   </tr>
                   <tr className="border-b border-gray-100">
                     <td className="py-2 text-gray-500">위치</td>
-                    <td className="py-2 font-medium">서울특별시 강남구 삼성로119길 19 (삼성동)</td>
+                    <td className="py-2 font-medium">-</td>
                   </tr>
                   <tr className="border-b border-gray-100">
                     <td className="py-2 text-gray-500">등록번호</td>
-                    <td className="py-2 font-medium">71-9250-3105</td>
+                    <td className="py-2 font-medium">-</td>
                   </tr>
                   <tr className="border-b border-gray-100">
                     <td className="py-2 text-gray-500">전화번호</td>
-                    <td className="py-2 font-medium">0264061400</td>
+                    <td className="py-2 font-medium">-</td>
                   </tr>
                 </tbody>
               </table>
