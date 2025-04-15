@@ -144,7 +144,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row">
           {/* Mobile Filter Overlay */}
           <div
-            className={`fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity duration-300 ${
+            className={`fixed inset-0 bg-black/50 z-20 md:hidden transition-opacity duration-300 ${
               isFilterOpen ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
           />
@@ -154,7 +154,7 @@ export default function Home() {
             id="region-filter"
             className={`
               md:w-64 md:mr-8 md:static md:block md:translate-y-0 md:pb-0
-              fixed left-0 right-0 bottom-0 z-50 bg-white rounded-t-2xl md:rounded-none
+              fixed left-0 right-0 bottom-0 z-30 bg-white rounded-t-2xl md:rounded-none
               transform transition-transform duration-300 ease-in-out
               ${isFilterOpen ? "translate-y-0" : "translate-y-full md:translate-y-0"}
               max-h-[80vh] md:max-h-none overflow-auto

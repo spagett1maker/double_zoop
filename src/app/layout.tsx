@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { AuthProvider } from "../contexts/auth-context";
 import ChannelService from "@/components/channel-talk";
+import { Analytics } from "@vercel/analytics/react"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Analytics />
         <AuthProvider>
           {children}
           <ChannelService/>

@@ -9,6 +9,7 @@ export default function CTASectionWithImage() {
           <div className="absolute inset-0 bg-black opacity-20 z-10"></div>
           <Image
             src="/cta_bg.jpg"
+            fill
             alt="Modern luxury property"
             className="w-full h-full object-cover object-center"
           />
