@@ -39,7 +39,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           {children}
-          <ChannelService user={mockUser}/>
+          <ChannelService/>
 
         </AuthProvider>
       </body>

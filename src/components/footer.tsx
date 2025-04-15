@@ -14,7 +14,7 @@ export default function Footer() {
             </h2>
             <p className="text-sm text-gray-700 mb-6 sm:mb-10">비버의 집, 안심전세 매물만 취급하는 전세전문 플랫폼</p>
             <Link
-              href="/contact"
+              href="https://de7j3.channel.io/home"
               className="inline-flex items-center text-white bg-orange-500 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 font-medium transition-colors hover:bg-orange-600 active:bg-orange-700"
             >
               Let&apos;s talk

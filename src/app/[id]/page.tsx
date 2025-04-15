@@ -74,59 +74,60 @@ export default function House() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
                   <div className="font-medium">가처분</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">확인 내역이 있어요</button>
+                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
                 </div>
                 <div className="text-sm text-gray-500 pl-1 pb-2">
                   집에 대한 권리에 가선 사람에 없을 확인시, 주의하세요,
-                  <br />
                   법원에 제기된 뒤시 명령으로 집이어는 것이에요
                 </div>
 
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
                   <div className="font-medium">가압류</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">확인 내역이 있어요</button>
+                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
                 </div>
                 <div className="text-sm text-gray-500 pl-1 pb-2">
                   집주인이 돈을 갚지 않았기 때문에
-                  <br />
                   돈을 빌려준 사람이 집재로 처분하는 것이에요
                 </div>
 
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
                   <div className="font-medium">압류</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">확인 내역이 있어요</button>
+                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
                 </div>
                 <div className="text-sm text-gray-500 pl-1 pb-2">
                   집주인이 세금 같은 오래 가진 연체액이
-                  <br />
                   세무서 등이 집을 팔아서 변상해요 해요
                 </div>
 
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
                   <div className="font-medium">가등기</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">확인 내역이 있어요</button>
+                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
                 </div>
                 <div className="text-sm text-gray-500 pl-1 pb-2">
                   매도인과 소유권을 취득하기 전에 미리 생각하니,
-                  <br />
                   집주인이 집을 담보로 돈을 빌린 경우 있어에요
                 </div>
 
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
                   <div className="font-medium">경매개시결정</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">확인 내역이 있어요</button>
+                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
                 </div>
                 <div className="text-sm text-gray-500 pl-1 pb-2">
                   집주인이 돈을 갚지 않았기 때문에
-                  <br />
                   법원이 집을 경매로 사람들 오게 하려해요
                 </div>
 
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
                   <div className="font-medium">임차권등기</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">확인 내역이 있어요</button>
+                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
                 </div>
                 <div className="text-sm text-gray-500 pl-1 pb-2">집주인이 세금 임대인에게 보증금을 돌려주지 않았어요</div>
+
+                <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                  <div className="font-medium">신탁부동산</div>
+                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
+                </div>
+                <div className="text-sm text-gray-500 pl-1 pb-2">집주인이 어떤 회사에게 이 집의 관리를 맡겼기 때문에 집주인은 전월세 계약을 할 권한이 없어요.</div>
               </div>
             </div>
           </div>

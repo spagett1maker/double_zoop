@@ -114,7 +114,7 @@ export default function Header() {
             <Link href="/service" className="">
               <p className="hover:font-semibold">서비스 소개</p>
             </Link>
-            <Link href="/contact" className="">
+            <Link href="https://de7j3.channel.io/home" className="">
               <p className="hover:font-semibold">문의하기</p>
             </Link>
           </nav>
