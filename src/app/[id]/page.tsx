@@ -39,7 +39,7 @@ export default function House() {
                 1/7 전체보기
               </div> */}
               <button
-                className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/80 rounded-full p-1"
+                className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/80 rounded-full p-1 cursor-pointer"
                 onClick={() => setImageIndex((prev) => (prev + 1) % images.length)}
               >
                 <ChevronRight className="w-5 h-5" />
