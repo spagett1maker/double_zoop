@@ -36,17 +36,16 @@ export interface PropertyListing {
 const mockProperties: PropertyListing[] = [
   {
     id: "1",
-    type: "상가",
-    dealType: "월세",
+    type: "아파트",
+    dealType: "전세",
     price: {
       deposit: 1.8, // 1억 8천
-      monthly: 140, // 140만원
     },
     size: {
-      pyeong: 51.6,
+      pyeong: 25.6,
       squareMeters: 170.5,
     },
-    floor: 1,
+    floor: 12,
     address: {
       region: "서울",
       district: "강남",

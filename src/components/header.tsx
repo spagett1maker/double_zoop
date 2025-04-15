@@ -210,7 +210,7 @@ export default function Header() {
                   서비스 소개
                 </Link>
                 <Link
-                  href="/contact"
+                  href="https://de7j3.channel.io/home"
                   className="hover:text-orange-500 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
