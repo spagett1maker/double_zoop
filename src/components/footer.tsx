@@ -79,7 +79,7 @@ export default function Footer() {
                   <p>업체명: KA한국자산관리</p>
                   <p>대표자 성명: 박준영</p>
                   <p>사업자 번호: 141-07-02875</p>
-                  <p>통신판매업 신고번호: -</p>
+                  {/* <p>통신판매업 신고번호: -</p> */}
                 </div>
                 <div className="space-y-1">
                   <p>사업장 소재지 주소: 경기도 용인시 수지구 만현로</p>
@@ -101,13 +101,13 @@ export default function Footer() {
         <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200 text-xs sm:text-sm flex flex-col sm:flex-row justify-between gap-4">
           <p>&copy; {new Date().getFullYear()} Beaver&apos;s House. All rights reserved.</p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/terms" className="hover:underline underline-offset-2">
+            <Link href="/policy/terms" className="hover:underline underline-offset-2">
               이용약관
             </Link>
-            <Link href="/privacy" className="hover:underline underline-offset-2">
+            <Link href="/policy/privacy" className="hover:underline underline-offset-2">
               개인정보처리방침
             </Link>
-            <Link href="/marketing" className="hover:underline underline-offset-2">
+            <Link href="/policy/marketing" className="hover:underline underline-offset-2">
               마케팅 수신동의
             </Link>
           </div>
