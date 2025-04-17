@@ -1,7 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ChevronRight, X, Filter } from "lucide-react"
+import Link from "next/link"
+import Image from "next/image"
+import { ChevronRight, X, Filter, PlusIcon } from "lucide-react"
 import { propertyService } from "@/app/api/get-properties"
 import { type House, HouseCard } from "@/components/ui/card"
 import Header from "@/components/header"
@@ -169,11 +171,11 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="md:sticky overflow-hidden p-4 md:p-0">
+            <div className="md:sticky overflow-hidden p-4 md:p-0 rounded-xl">
               {/* Region Filter */}
-              <div className="flex flex-col md:flex-row rounded-xl shadow-md overflow-hidden">
+              <div className="flex flex-col md:flex-row rounded-xl shadow-md overflow-hidden sm:h-[384px]">
                 {/* Major Regions */}
-                <div className="w-full md:w-1/3">
+                <div className="w-full md:w-1/3 h-full">
                   {majorRegions.map((region, index) => (
                     <button
                       key={region}
@@ -188,7 +190,7 @@ export default function Home() {
                 </div>
 
                 {/* Sub Regions */}
-                <div className="w-full md:w-2/3 bg-white">
+                <div className="w-full md:w-2/3 bg-white h-full border-[1.5] border-gray-50">
                   <div className="flex justify-between items-center py-2.5 px-4 border-b border-gray-100">
                     <span className="text-lg font-medium">{majorRegion}</span>
                     <button
@@ -198,7 +200,7 @@ export default function Home() {
                       전체 <ChevronRight className="h-4 w-4 ml-1" />
                     </button>
                   </div>
-                  <div className="max-h-[300px] md:max-h-[500px] overflow-y-auto">
+                  <div className="max-h-[300px] sm:max-h-[384px] overflow-y-auto">
                     {subRegionsMap[majorRegion]?.map((region) => (
                       <button
                         key={region}
@@ -214,6 +216,22 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            <div className="relative mt-6 h-[100px] w-full overflow-hidden rounded-lg group">
+              <Link href="/upload" className="absolute inset-0 z-30" />
+              <Image 
+                src="/side_upload.png"
+                alt="side"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
+              />
+              <div className="absolute inset-0 bg-black opacity-50 z-10 rounded-lg" />
+              <div className="absolute inset-0 z-20 flex items-center justify-center">
+                <p className="text-white text-base font-semibold">매물을 직접 등록하세요.</p>
+              </div>
+            </div>
+
+            
           </div>
 
           {/* Property Listings */}
