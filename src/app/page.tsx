@@ -218,7 +218,7 @@ export default function Home() {
             </div>
 
             <div className="relative mt-6 h-[100px] w-full overflow-hidden rounded-lg group">
-              <Link href="/upload" className="absolute inset-0 z-30" />
+              <Link href="https://walla.my/survey/BQ5vA9Nl7SPhwMu7RA9p" className="absolute inset-0 z-30" />
               <Image 
                 src="/side_upload.png"
                 alt="side"
