@@ -20,7 +20,7 @@ export default function House() {
     <>
       <Header />
       <div className="h-16"></div>
-      <div className="max-w-7xl mx-auto px-7 py-6 mb-12 font-sans">
+      <div className="max-w-7xl mx-auto px-4 py-6 mb-12 font-sans">
         {/* Breadcrumb */}
         <div className="flex items-center text-xs sm:text-sm text-gray-500 mb-4">
           <span>홈</span>

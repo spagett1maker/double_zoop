@@ -8,7 +8,7 @@ export default function Blog() {
         <span className='text-orange-500'>Articles</span> and Blog
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
         <div className="rounded-lg overflow-hidden bg-white">
           <div className="aspect-square relative overflow-hidden rounded-lg">
             <Image

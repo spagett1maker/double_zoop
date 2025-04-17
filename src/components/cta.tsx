@@ -2,16 +2,17 @@
 import Image from 'next/image'
 export default function CTASectionWithImage() {
   return (
-    <section className="relative w-full overflow-hidden rounded-3xl max-w-7xl mx-auto bg-white mb-20 px-4 sm:px-0">
+    <section className="relative w-full overflow-hidden rounded-3xl max-w-7xl mx-auto bg-white mb-20">
       {/* Background image of a modern property */}
-      <div className="absolute inset-0 flex justify-center items-center">
-        <div className="w-full max-w-7xl mx-3 sm:mx-0 h-full rounded-3xl overflow-hidden">
+      <div className="absolute inset-0 px-4">
+        <div className="w-full h-full rounded-3xl overflow-hidden relative">
+
           <div className="absolute inset-0 bg-black opacity-20 z-10"></div>
           <Image
             src="/cta_bg.jpg"
             fill
             alt="Modern luxury property"
-            className="w-full h-full object-cover object-center"
+            className=" object-cover object-center"
           />
         </div>
       </div>

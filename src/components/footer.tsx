@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react"
 export default function Footer() {
   return (
     <footer className="py-10 sm:py-12 px-4 sm:px-6 md:px-12 lg:px-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 md:gap-8">
           {/* Left section */}
           <div className="sm:col-span-2 md:col-span-5">

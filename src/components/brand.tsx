@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react"
 export default function BrandAboutSection() {
   return (
     <div className="relative bg-white min-h-max max-w-7xl mx-auto px-6 sm:px-0">
-      <div className="container mx-auto pt-6 pb-12 sm:pb-16 relative z-10">
+      <div className="container mx-auto pt-6 pb-12 sm:pb-16 relative z-10 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-16">
           {/* Left column with OUR STORY heading */}
           <div className="lg:col-span-2">
