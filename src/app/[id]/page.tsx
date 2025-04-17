@@ -222,7 +222,7 @@ export default function House() {
               </div>
             </div> */}
 
-            <MapWithMarker address="서울특별시 강남구 학동로 426 (삼성동)" />
+            <MapWithMarker address="서울특별시 강남구 학동로 426 (삼성동), 본관" />
             
 
             <div className="mt-4 text-sm">

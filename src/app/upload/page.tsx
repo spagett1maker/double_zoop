@@ -119,13 +119,7 @@ export default function PropertyUploadPage() {
   useEffect(() => {
     // Check if user is authenticated and is a landlord
     if (!isLoading) {
-      if (!session) {
-        router.push("/login")
-      } else if (profile?.role !== "landlord") {
-        // Redirect to dashboard if not a landlord
-        router.push("/")
-        alert("Only landlords can upload property listings")
-      }
+      
       console.log("user:", user)
     }
   }, [isLoading, session, user, router])
@@ -217,9 +211,7 @@ export default function PropertyUploadPage() {
   }
 
   // If no session or not a landlord, the useEffect will redirect
-  if (!session || profile?.role !== "landlord") {
-    return null
-  }
+
 
   // Rest of the component remains the same as before
   // ...
@@ -653,7 +645,6 @@ export default function PropertyUploadPage() {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-900">{profile.nickname}</p>
                 <p className="text-sm text-gray-500">
                   {user?.user_metadata.role === "landlord" ? "임대인 (Landlord)" : ""}
                 </p>

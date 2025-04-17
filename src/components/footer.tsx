@@ -86,8 +86,8 @@ export default function Footer() {
                   <p>전화번호: 010-3593-9747</p>
                   <p>
                     이메일:{" "}
-                    <a href="mailto:kaownhouse@gmail.com" className="hover:underline">
-                      kaownhouse@gmail.com
+                    <a href="mailto:contact@beavershouse.com" className="hover:underline">
+                      contact@beavershouse.com
                     </a>
                   </p>
                 </div>
