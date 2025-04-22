@@ -12,7 +12,7 @@ export default function Footer() {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight mb-2">
               <span className="text-orange-500">Beaver&apos;</span>s House
             </h2>
-            <p className="text-sm text-gray-700 mb-6 sm:mb-10">비버의 집, 안심전세 매물만 취급하는 전세전문 플랫폼</p>
+            <p className="text-sm text-gray-700 mb-6 sm:mb-10">비버의 집, 안심 매물만 취급하는 부동산 플랫폼</p>
             <Link
               href="https://de7j3.channel.io/home"
               className="inline-flex items-center text-white bg-orange-500 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 font-medium transition-colors hover:bg-orange-600 active:bg-orange-700"
@@ -83,7 +83,7 @@ export default function Footer() {
                 </div>
                 <div className="space-y-1">
                   <p>사업장 소재지 주소: 경기도 용인시 수지구 만현로</p>
-                  <p>전화번호: 010-3593-9747</p>
+                  <p>전화번호: 0504-0810-8746</p>
                   <p>
                     이메일:{" "}
                     <a href="mailto:contact@beavershouse.com" className="hover:underline">

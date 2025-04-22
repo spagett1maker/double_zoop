@@ -1,5 +1,6 @@
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Blog() {
   return (
@@ -9,6 +10,7 @@ export default function Blog() {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+        <Link href="https://acoustic-beechnut-d15.notion.site/1bd6cc418ff2803cb7acc4905b5bb4f1" className='cursor-pointer'>
         <div className="rounded-lg overflow-hidden bg-white">
           <div className="aspect-square relative overflow-hidden rounded-lg">
             <Image
@@ -27,7 +29,9 @@ export default function Blog() {
             </div>
           </div>
         </div>
+        </Link>
 
+        <Link href="https://acoustic-beechnut-d15.notion.site/1bd6cc418ff28054aeb2e9a5a688a700" className='cursor-pointer'>
         <div className="rounded-lg overflow-hidden bg-white">
           <div className="aspect-square relative overflow-hidden rounded-lg">
             <Image
@@ -46,7 +50,9 @@ export default function Blog() {
             </div>
           </div>
         </div>
+        </Link>
 
+        <Link href="https://acoustic-beechnut-d15.notion.site/HF-HUG-SGI-1bd6cc418ff2805cb845e3a3b08e2c89" className='cursor-pointer'>
         <div className="rounded-lg overflow-hidden bg-white">
           <div className="aspect-square relative overflow-hidden rounded-lg">
             <Image
@@ -65,6 +71,7 @@ export default function Blog() {
             </div>
           </div>
         </div>
+        </Link>
       </div>
     </section>
   )

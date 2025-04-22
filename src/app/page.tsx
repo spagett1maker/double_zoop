@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ChevronRight, X, Filter, PlusIcon } from "lucide-react"
+import { ChevronRight, X, Filter } from "lucide-react"
 import { propertyService } from "@/app/api/get-properties"
 import { type House, HouseCard } from "@/components/ui/card"
 import Header from "@/components/header"
@@ -143,7 +143,7 @@ export default function Home() {
         </div>
 
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row">
+        <div className="max-w-7xl mx-auto px-4 sm:py-4 flex flex-col md:flex-row">
           {/* Mobile Filter Overlay */}
           <div
             className={`fixed inset-0 bg-black/50 z-20 md:hidden transition-opacity duration-300 ${
@@ -217,7 +217,8 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative mt-6 h-[100px] w-full overflow-hidden rounded-lg group">
+            {/** 매물 업로드 버튼 */}
+            <div className="relative mt-6 hidden md:block h-[100px] w-full overflow-hidden rounded-lg group mb-3">
               <Link href="https://walla.my/survey/BQ5vA9Nl7SPhwMu7RA9p" className="absolute inset-0 z-30" />
               <Image 
                 src="/side_upload.png"
@@ -231,11 +232,45 @@ export default function Home() {
               </div>
             </div>
 
+            {/** 안심 매물 받기 버튼 */}
+            <div className="hidden md:block w-full px-4 py-2 rounded-md border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-colors ease-in-out cursor-pointer justify-center items-center">
+              <Link 
+                href="https://walla.my/v/Gpk4AC09xaTD59xHDej6"
+                className="w-full h-full font-semibold text-sm text-center flex justify-center items-center"
+              >
+                안심 매물 추천 목록 받아보기
+              </Link>
+            </div>
             
           </div>
 
           {/* Property Listings */}
           <div className="flex-1 mt-6 md:mt-0 pb-8">
+            {/* Mobile Upload Button */}
+            <div className="md:hidden relative h-[100px] w-full overflow-hidden rounded-lg group mb-3">
+              <Link href="https://walla.my/survey/BQ5vA9Nl7SPhwMu7RA9p" className="absolute inset-0 z-30" />
+              <Image 
+                src="/side_upload.png"
+                alt="side"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
+              />
+              <div className="absolute inset-0 bg-black opacity-50 z-10 rounded-lg" />
+              <div className="absolute inset-0 z-20 flex items-center justify-center">
+                <p className="text-white text-base font-semibold">매물을 직접 등록하세요.</p>
+              </div>
+            </div>
+
+            {/** 모바일 안심매물 받기 버튼 */}
+            <div className="md:hidden w-full px-4 py-2 mb-3 rounded-md border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-colors ease-in-out cursor-pointer justify-center items-center">
+              <Link 
+                href="https://walla.my/v/Gpk4AC09xaTD59xHDej6"
+                className="w-full h-full font-semibold text-sm text-center flex justify-center items-center"
+              >
+                안심 매물 추천 목록 받아보기
+              </Link>
+            </div>
+
             {loading ? (
               <div className="flex justify-center items-center h-64">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
