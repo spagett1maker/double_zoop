@@ -119,76 +119,66 @@ export default function House() {
 
             {/* Safety Check Section */}
             <div className="mt-4 border-t border-gray-200 pt-4 pb-6 sm:pb-0">
-              <h2 className="text-lg font-bold mb-2">이 집의 위험요소</h2>
-              <p className="text-sm text-gray-600 mb-4">처음 이 집을 살펴볼때 우리 위험확인 주의사항만 가져왔어요</p>
+              <h2 className="text-lg font-bold mb-2">필수 체크리스트</h2>
+              <p className="text-sm text-gray-600 mb-4">분양 시 꼭 확인해야하는 요소들을 모아놨어요</p>
 
-              {/* <div className="bg-green-50 p-4 rounded-lg mb-6 flex items-center">
+              <div className="bg-green-50 p-4 rounded-lg mb-6 flex items-center">
                 <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center mr-3">
-                  <span className="text-orange-500">👍</span>
+                  <span className="text-orange-500">✅</span>
                 </div>
                 <div>
-                  <p className="font-medium text-green-800">모두 안전하다는 것을 확인했어요</p>
-                  <p className="text-sm text-green-700">주의해야할 내역만 조회시 확인을 마쳤어요</p>
+                  <p className="font-medium text-sm text-green-800">아파트 분양 시 아래 항목들을 꼭 확인하세요!</p>
                 </div>
-              </div> */}
+              </div>
 
-              <div className="space-y-4">
-                <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                  <div className="font-medium">가처분</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
-                </div>
-                <div className="text-sm text-gray-500 pl-1 pb-2">
-                  집에 대한 권리에 가선 사람에 없을 확인시, 주의하세요,
-                  법원에 제기된 뒤시 명령으로 집이어는 것이에요
-                </div>
-
-                <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                  <div className="font-medium">가압류</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
-                </div>
-                <div className="text-sm text-gray-500 pl-1 pb-2">
-                  집주인이 돈을 갚지 않았기 때문에
-                  돈을 빌려준 사람이 집재로 처분하는 것이에요
+              <div className="space-y-0">
+                <div className="flex justify-between items-center py-2 border-gray-100">
+                  <div className="font-medium">전매 제한 여부</div>
+                  {subdivision.risk?.["전매제한 여부"] ? (
+                      <button className="bg-orange-50 text-orange-700 text-xs px-3 py-1 rounded-full">전매 제한 되어있어요 ({subdivision.risk["전매제한 기간"]})</button>
+                    ) : (
+                      <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">전매 가능해요</button>
+                  )}
                 </div>
 
-                <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                  <div className="font-medium">압류</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
+                <div className="flex justify-between items-center py-2 border-gray-100">
+                  <div className="font-medium">실거주 의무 여부</div>
+                  {subdivision.risk?.["실거주 의무 여부"] ? (
+                      <button className="bg-orange-50 text-orange-700 text-xs px-3 py-1 rounded-full">실거주 의무 있어요 ({subdivision.risk["실거주 의무 기간"]})</button>
+                    ) : (
+                      <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">실거주 의무 없어요</button>
+                  )}
                 </div>
-                <div className="text-sm text-gray-500 pl-1 pb-2">
-                  집주인이 세금 같은 오래 가진 연체액이
-                  세무서 등이 집을 팔아서 변상해요 해요
-                </div>
+                
 
-                <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                  <div className="font-medium">가등기</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
-                </div>
-                <div className="text-sm text-gray-500 pl-1 pb-2">
-                  매도인과 소유권을 취득하기 전에 미리 생각하니,
-                  집주인이 집을 담보로 돈을 빌린 경우 있어에요
+                <div className="flex justify-between items-center pt-2 pb-3 border-b border-gray-100">
+                  <div className="font-medium">규제 지역 여부</div>
+                  {subdivision.risk?.["규제 지역 여부"] ? (
+                      <button className="bg-orange-50 text-orange-700 text-xs px-3 py-1 rounded-full">규제 지역이에요</button>
+                    ) : (
+                      <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">규제 지역이 아니에요</button>
+                  )}
                 </div>
 
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                  <div className="font-medium">경매개시결정</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
-                </div>
-                <div className="text-sm text-gray-500 pl-1 pb-2">
-                  집주인이 돈을 갚지 않았기 때문에
-                  법원이 집을 경매로 사람들 오게 하려해요
+                  <div className="font-medium">계약금 비율</div>
+                  <button className=" text-sm px-3 py-1 rounded-full">{subdivision.risk?.["계약금 비율"]}%</button>
                 </div>
 
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                  <div className="font-medium">임차권등기</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
+                  <div className="font-medium">역세권</div>
+                  <button className=" text-sm px-3 py-1 rounded-full">{subdivision.risk?.["역세권"]}</button>
                 </div>
-                <div className="text-sm text-gray-500 pl-1 pb-2">집주인이 세금 임대인에게 보증금을 돌려주지 않았어요</div>
 
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                  <div className="font-medium">신탁부동산</div>
-                  <button className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full">해당 내역이 없어요</button>
+                  <div className="font-medium">착공일</div>
+                  <button className=" text-sm px-3 py-1 rounded-full">{subdivision.risk?.["착공일"]}</button>
                 </div>
-                <div className="text-sm text-gray-500 pl-1 pb-2">집주인이 어떤 회사에게 이 집의 관리를 맡겼기 때문에 집주인은 전월세 계약을 할 권한이 없어요.</div>
+
+                <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                  <div className="font-medium">학군</div>
+                  <button className=" text-sm px-3 py-1 rounded-full">{subdivision.risk?.["학군"]}</button>
+                </div>
               </div>
             </div>
           </div>
@@ -199,7 +189,7 @@ export default function House() {
 
             <div className="mb-2">
               <h1 className="text-2xl font-bold">
-                <span className="text-orange-500">분양중</span> {formatPrice(subdivision.price || 0)} ~
+                <span className="text-orange-500">분양중</span> {formatPrice(subdivision.price || 0)} ~ {formatPrice(subdivision.size?.[subdivision.size.length - 1]?.price || 0)}
               </h1>
             </div>
 

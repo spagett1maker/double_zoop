@@ -52,13 +52,9 @@ export function HouseCard({ house }: { house: Subdivision }) {
           </div>
         </div>
         <div className="flex gap-2 py-[2px]">
-          {house.tags?.[0] ? (
+          {house.tags?.[0] && (
             <div className="flex items-center gap-1 text-[12px] bg-[#e7f9f3] text-[#068C6D] font-medium rounded-lg py-1 px-2">
               {/* <House className="w-4 h-4 text-[#068C6D]" />  */} 즉시입주
-            </div>
-          ) : (
-            <div className="flex items-center gap-1 text-[12px] bg-[#ffddc8] text-[#f37021] font-medium rounded-lg py-1 px-2">
-              {/* <House className="w-4 h-4 text-[#f37021]" /> 즉시입주 불가능 */} 즉시입주
             </div>
           )}
           {house.tags?.[1] ? (
