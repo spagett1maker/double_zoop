@@ -55,13 +55,13 @@ export default function SubdivisionList() {
             </div>
             <div>
               <p className="text-sm text-gray-500">가격</p>
-              <p>{subdivision.price.toLocaleString()}원</p>
+              <p>{subdivision.price ? subdivision.price.toLocaleString() : '가격 정보 없음'}원</p>
             </div>
           </div>
           {subdivision.images && subdivision.images.length > 0 && (
             <Image
               src={subdivision.images[0]}
-              alt={subdivision.subdivision_name}
+              alt={subdivision.subdivision_name || '분양 정보'}
               className="w-full h-48 object-cover mt-4 rounded"
               width={100}
               height={100}
