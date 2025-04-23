@@ -17,13 +17,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const mockUser = {
-  id: "user_abc123",
-  name: "홍길동",
-  email: "hong@example.com",
-  phoneNumber: "01012345678"
-}
-
 export const metadata: Metadata = {
   title: "Beaver's House | 안전한 전세, 비버가 찾아드립니다",
   description: "누구나 실수하기 마련이지만 , 집은 그럴 수 없으니까. 안전한 전세 비버가 찾아드립니다.",

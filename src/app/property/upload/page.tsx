@@ -8,6 +8,8 @@ import DetailInfo from '@/components/property/upload/DetailInfo';
 import ImageUpload from '@/components/property/upload/ImageUpload';
 import { supabase } from '@/lib/supabase';
 import type { Property } from '@/lib/supabase';
+import { Stepper, StepperItem, StepperIndicator, StepperTitle, StepperSeparator, StepperTrigger } from "@/components/ui/stepper"
+import Header from '@/components/header';
 
 interface FormData {
   basicInfo: {
@@ -90,7 +92,7 @@ export default function PropertyUploadPage() {
     }
   };
 
-  const updateFormData = async (section: keyof FormData, data: any) => {
+  const updateFormData = async (section: keyof FormData, data: FormData[keyof FormData]) => {
     setFormData((prev) => ({
       ...prev,
       [section]: data,
@@ -177,35 +179,27 @@ export default function PropertyUploadPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto py-8 px-4">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">매물 등록</h1>
-        <div className="mt-4 flex justify-between items-center">
-          {steps.map((step) => (
-            <div
-              key={step.id}
-              className={`flex items-center ${
-                step.id === currentStep ? 'text-blue-600' : 'text-gray-500'
-              }`}
-            >
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${
-                  step.id === currentStep
-                    ? 'border-blue-600 bg-blue-600 text-white'
-                    : 'border-gray-300'
-                }`}
-              >
-                {step.id}
-              </div>
-              <span className="ml-2">{step.title}</span>
-              {step.id !== steps.length && (
-                <div className="w-12 h-0.5 mx-2 bg-gray-300" />
-              )}
-            </div>
-          ))}
+    <>
+      <Header />
+      <div className="max-w-3xl mx-auto py-8 px-4 pt-20">
+        <div className="mb-8">
+          <div className="mt-6">
+            <Stepper defaultValue={currentStep} orientation="horizontal">
+              {steps.map((step, index) => (
+                <StepperItem key={step.id} step={step.id} completed={step.id < currentStep}>
+                  <StepperTrigger>
+                    <StepperIndicator />
+                    <StepperTitle>{step.title}</StepperTitle>
+                  </StepperTrigger>
+                  {index < steps.length - 1 && <StepperSeparator />}
+                </StepperItem>
+              ))}
+            </Stepper>
+          </div>
         </div>
+        {renderStep()}
       </div>
-      {renderStep()}
-    </div>
+    </>
+    
   );
 } 
