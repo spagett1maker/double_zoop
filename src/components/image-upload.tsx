@@ -53,7 +53,7 @@ export default function ImageUpload({ images, setImages, maxFiles = 10, label = 
       "image/*": [".jpeg", ".jpg", ".png", ".gif"],
     },
     maxFiles: maxFiles,
-    maxSize: 10 * 1024 * 1024, // 5MB
+    maxSize: 30 * 1024 * 1024, // 5MB
   })
 
   const removeImage = (index: number) => {
