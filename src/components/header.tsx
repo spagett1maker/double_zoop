@@ -102,17 +102,18 @@ export default function Header() {
     <header className={`${hasScrolled ? "border-b border-gray-200" : ""} fixed w-full z-50 bg-white px-3 sm:px-6`}>
       <div className="container mx-auto max-w-[1280px] px-4 flex items-center justify-between h-16">
         <div className="flex items-center">
-          <Link href="/" className="mr-4 sm:mr-8 cursor-pointer">
+          <Link href="/" className="mr-4 sm:mr-8 cursor-pointer flex flex-col items-center">
             <p className="text-xl sm:text-2xl font-bold">
-              <span className="text-orange-500">Beaver</span>&apos;s House
+              <span className="text-orange-500">ZOOP</span> ZOOP
             </p>
+            <p className="text-sm text-gray-500">아파트 분양 정보는 &apos;줍줍&apos;</p>
           </Link>
           
         </div>
         <div className="flex items-center">
           <nav className="hidden md:flex space-x-10 px-10 font-medium">
             <Link href="/service" className="">
-              <p className="hover:font-semibold">서비스 소개</p>
+              <p className="hover:font-semibold">KA 한국자산관리</p>
             </Link>
             <Link href="https://de7j3.channel.io/home" className="">
               <p className="hover:font-semibold">문의하기</p>
@@ -132,7 +133,7 @@ export default function Header() {
               </Link>
             )}
             <button onClick={handleDownloadClick} className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md px-4 py-2 text-sm transition-colors ease-in-out cursor-pointer">
-              앱 다운로드
+              광고 문의하기
             </button>
           </div>
 
@@ -245,9 +246,11 @@ export default function Header() {
           <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
             <div className="flex flex-col items-center justify-center py-6">
               <div className="h-8 w-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-              <h3 className="text-lg font-medium">준비중입니다 !</h3>
-              <p className="text-sm text-gray-500 my-1">앱이 준비되면 알려드리겠습니다.</p>
-              <Link href="/signup" className="text-orange-500 font-medium text-sm mt-4 hover:font-bold">알림 받기</Link>
+              <h3 className="text-lg mb-6 font-medium">준비중입니다 !</h3>
+              {/* <p className="text-sm text-gray-500 my-1">앱이 준비되면 알려드리겠습니다.</p> */}
+              {/* <Link href="/signup" className="text-orange-500 font-medium text-sm mt-4 hover:font-bold">알림 받기</Link> */}
+              <a href="tel:01021578187" className="hover:underline flex items-center text-base gap-1 mb-2">📞 광고 문의 하기</a>
+              <a href="mailto:contact@zoopzoop.homes" className="hover:underline mb-3 text-base"> 📧 광고 문의 하기</a>
             </div>
           </Modal>
         </div>

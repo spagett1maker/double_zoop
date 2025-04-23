@@ -18,6 +18,7 @@ export default function SubdivisionUploadPage() {
   const [formData, setFormData] = useState<Subdivision>({
     subdivision_name: "",
     area: "",
+    address_category: "",
     title: "",
     property_type: "",
     price: 0,
@@ -200,7 +201,23 @@ export default function SubdivisionUploadPage() {
                     id="area"
                     name="area"
                     type="text"
+                    required
                     value={formData.area || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="address_category" className="mb-1 block text-sm font-medium text-gray-700">
+                    주소 카테고리(강남/서초, 강동/송파 그 카테고리임.) <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="address_category"
+                    name="address_category"
+                    type="text"
+                    required
+                    value={formData.address_category || ""}
                     onChange={handleInputChange}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                   />

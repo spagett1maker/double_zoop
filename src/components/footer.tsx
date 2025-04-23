@@ -10,9 +10,9 @@ export default function Footer() {
           <div className="sm:col-span-2 md:col-span-5">
             <p className="text-sm mb-3">Contact</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight mb-2">
-              <span className="text-orange-500">Beaver&apos;</span>s House
+              <span className="text-orange-500">ZOOP</span> ZOOP
             </h2>
-            <p className="text-sm text-gray-700 mb-6 sm:mb-10">비버의 집, 안심 매물만 취급하는 부동산 플랫폼</p>
+            <p className="text-sm text-gray-700 mb-6 sm:mb-10">아파트 분양 정보는 &apos;줍줍&apos;</p>
             <Link
               href="https://de7j3.channel.io/home"
               className="inline-flex items-center text-white bg-orange-500 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 font-medium transition-colors hover:bg-orange-600 active:bg-orange-700"

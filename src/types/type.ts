@@ -43,6 +43,7 @@ export type Subdivision = {
   // Profile Info
   subdivision_name: string | null; // 사업명
   area: string | null; // 사업지/권역
+  address_category: string | null; // 주소 카테고리 (subregions)
 
   // Basic Info
   title: string | null; // 사업병

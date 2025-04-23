@@ -13,7 +13,7 @@ import { Subdivision } from '@/types/type';
 
 export default function Home() {
   const [majorRegion, setMajorRegion] = useState("서울")
-  const [subRegion, setSubRegion] = useState("강남/역삼/삼성")
+  const [subRegion, setSubRegion] = useState("강남/서초")
   const [showAllSubRegions, setShowAllSubRegions] = useState(false)
   const [subdivisions, setSubdivisions] = useState<Subdivision[]>([]);
   const [loading, setLoading] = useState(true)
@@ -62,10 +62,16 @@ export default function Home() {
   useEffect(() => {
     async function fetchSubdivisions() {
       try {
-        const { data, error } = await supabase
+        let query = supabase
           .from('subdivisions')
           .select('*')
           .order('created_at', { ascending: false });
+
+        if (!showAllSubRegions) {
+          query = query.eq('address_category', subRegion);
+        }
+
+        const { data, error } = await query;
 
         if (error) throw error;
         setSubdivisions(data || []);
@@ -78,7 +84,7 @@ export default function Home() {
     }
 
     fetchSubdivisions();
-  }, []);
+  }, [majorRegion, subRegion, showAllSubRegions]);
 
   // Close filter when clicking outside
   useEffect(() => {
@@ -246,7 +252,7 @@ export default function Home() {
             </div>
 
             {/** 매물 업로드 버튼 */}
-            <div className="relative mt-6 hidden md:block h-[100px] w-full overflow-hidden rounded-lg group mb-3">
+            <div className="relative mt-6 hidden md:block h-[100px] w-full overflow-hidden rounded-lg group mb-1">
               <Link href="https://walla.my/survey/BQ5vA9Nl7SPhwMu7RA9p" className="absolute inset-0 z-30" />
               <Image 
                 src="/side_upload.png"
@@ -261,13 +267,18 @@ export default function Home() {
             </div>
 
             {/** 안심 매물 받기 버튼 */}
-            <div className="hidden md:block w-full px-4 py-2 rounded-md border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-colors ease-in-out cursor-pointer justify-center items-center">
-              <Link 
-                href="https://walla.my/v/Gpk4AC09xaTD59xHDej6"
-                className="w-full h-full font-semibold text-sm text-center flex justify-center items-center"
-              >
-                안심 매물 추천 목록 받아보기
-              </Link>
+            <div className="relative mt-3 hidden md:block h-[100px] w-full overflow-hidden rounded-lg group mb-3">
+              <Link href="https://walla.my/survey/BQ5vA9Nl7SPhwMu7RA9p" className="absolute inset-0 z-30" />
+              <Image 
+                src="/side_upload2.jpg"
+                alt="side"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
+              />
+              <div className="absolute inset-0 bg-black opacity-50 z-10 rounded-lg" />
+              <div className="absolute inset-0 z-20 flex items-center justify-center">
+                <p className="text-white text-base font-semibold">분양 대행사 광고 문의</p>
+              </div>
             </div>
             
           </div>
@@ -290,13 +301,18 @@ export default function Home() {
             </div>
 
             {/** 모바일 안심매물 받기 버튼 */}
-            <div className="md:hidden w-full px-4 py-2 mb-3 rounded-md border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-colors ease-in-out cursor-pointer justify-center items-center">
-              <Link 
-                href="https://walla.my/v/Gpk4AC09xaTD59xHDej6"
-                className="w-full h-full font-semibold text-sm text-center flex justify-center items-center"
-              >
-                안심 매물 추천 목록 받아보기
-              </Link>
+            <div className="md:hidden relative h-[100px] w-full overflow-hidden rounded-lg group mb-3">
+              <Link href="https://walla.my/survey/BQ5vA9Nl7SPhwMu7RA9p" className="absolute inset-0 z-30" />
+              <Image 
+                src="/side_upload2.jpg"
+                alt="side"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
+              />
+              <div className="absolute inset-0 bg-black opacity-50 z-10 rounded-lg" />
+              <div className="absolute inset-0 z-20 flex items-center justify-center">
+                <p className="text-white text-base font-semibold">분양 대행사 광고 문의</p>
+              </div>
             </div>
 
             {loading ? (
