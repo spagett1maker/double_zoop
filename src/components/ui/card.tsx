@@ -1,24 +1,9 @@
-
-
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, House, MessageCircle } from "lucide-react";
+// import { House } from "lucide-react";
+import { Subdivision } from "@/types/type";
+import { formatPrice } from "@/lib/utils";
 
-export interface House {
-  id: string;
-  imageUrl: string;
-  category: string;
-  price: string;
-  size: string;
-  floor: string;
-  info: string;
-  location: string;
-  uploadedAt: Date;
-  guarantee_tag: boolean;
-  safety_tag: boolean;
-  chats: number;
-  likes: number;
-}
 
 export function formatRelativeTime(date: Date): string {
   const now = new Date();
@@ -44,42 +29,65 @@ export function formatRelativeTime(date: Date): string {
 }
 
 
-export function HouseCard({ house }: { house: House }) {
+export function HouseCard({ house }: { house: Subdivision }) {
   return (
     <Link href={`/${house.id}`} className="flex flex-col overflow-hidden gap-3 cursor-pointer mb-6">
-      <div className="relative aspect-6/5 rounded-lg overflow-hidden">
-        <Image src={house.imageUrl || "/placeholder.svg"} alt={house.category} fill className="object-cover rounded-lg hover:scale-105 duration-300 transition-transform hover:z-10" />
+      <div className="relative aspect-6/5 w-full rounded-lg overflow-hidden">
+        <Image src={house.images?.[0] || "/placeholder.svg"} alt={house.subdivision_name || "분양 정보"} fill className="object-cover rounded-lg hover:scale-105 duration-300 transition-transform hover:z-10" />
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-2">
         <div className="relative">
-          <div className="text-sm text-gray-700">{house.category}</div>
-          <div className="text-lg font-semibold">{house.price}</div>
+          <div className="text-sm text-gray-700">{house.property_type}</div>
+          <div className="text-xl font-bold">{house.subdivision_name}</div>
+          <div className="text-lg font-medium">{formatPrice(house.price || 0)} ~</div>
+        </div>
+        <div className="relative">
           <div className="flex text-base">
-            <div className="">{house.size}</div>
+            <div className="">{house.size?.[0]?.type ? `${house.size[0].type}(${house.size[0].units}세대) ~` : '면적 정보 없음'}</div>
+          </div>
+          <div className="flex text-base">
+            <div className="">{house.up_floor}층</div>
             <div className="ml-1">·</div>
-            <div className="ml-1">{house.floor}</div>
+            <div className="ml-1">총 {house.units_number}세대</div>
           </div>
         </div>
         <div className="flex gap-2 py-[2px]">
-          {house.safety_tag && (
+          {house.tags?.[0] ? (
             <div className="flex items-center gap-1 text-[12px] bg-[#e7f9f3] text-[#068C6D] font-medium rounded-lg py-1 px-2">
-              <House className="w-4 h-4 text-[#068C6D]" /> 안전 검증
+              {/* <House className="w-4 h-4 text-[#068C6D]" />  */} 즉시입주
+            </div>
+          ) : (
+            <div className="flex items-center gap-1 text-[12px] bg-[#ffddc8] text-[#f37021] font-medium rounded-lg py-1 px-2">
+              {/* <House className="w-4 h-4 text-[#f37021]" /> 즉시입주 불가능 */} 즉시입주
             </div>
           )}
-          {house.guarantee_tag && (
+          {house.tags?.[1] ? (
+            <div className="flex items-center gap-1 text-[12px] bg-[#e7f9f3] text-[#068C6D] font-medium rounded-lg py-1 px-2">
+              {/* <House className="w-4 h-4 text-[#068C6D]" /> 전매가능 */} 전매가능
+            </div>
+          ) : (
             <div className="flex items-center gap-1 text-[12px] bg-[#ffddc8] text-[#f37021] font-medium rounded-lg py-1 px-2">
-              <House className="w-4 h-4 text-[#f37021]" /> 보증보험 가입
+              {/* <House className="w-4 h-4 text-[#f37021]" /> 전매제한 */} 전매제한
+            </div>
+          )}
+          {house.tags?.[2] ? (
+            <div className="flex items-center gap-1 text-[12px] bg-[#e7f9f3] text-[#068C6D] font-medium rounded-lg py-1 px-2">
+              {/* <House className="w-4 h-4 text-[#068C6D]" /> 다주택 가능 */} 다주택 가능
+            </div>
+          ) : (
+            <div className="flex items-center gap-1 text-[12px] bg-[#ffddc8] text-[#f37021] font-medium rounded-lg py-1 px-2">
+              {/* <House className="w-4 h-4 text-[#f37021]" /> 다주택 불가능 */} 다주택 불가능
             </div>
           )}
         </div>
         
         <div className="relative">
           <div className="flex gap-1 text-sm text-gray-600">
-            <div>{house.location}</div>
-            <div>·</div>
-            <div>{formatRelativeTime(house.uploadedAt)}</div>
+            <div>{house.address}</div>
+            {/* <div>·</div>
+            {house.created_at && <div>{formatRelativeTime(new Date(house.created_at))}</div>} */}
           </div>
-          <div className="flex items-center gap-3 mt-1">
+          {/* <div className="flex items-center gap-3 mt-1">
             <div className="flex gap-1 items-center text-gray-600">
               <MessageCircle className="w-4 h-4" />
               <span className="text-sm">{house.chats}</span>
@@ -88,7 +96,7 @@ export function HouseCard({ house }: { house: House }) {
               <Heart className="w-4 h-4" />
               <span className="text-s">{house.likes}</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </Link>

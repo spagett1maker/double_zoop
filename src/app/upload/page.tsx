@@ -4,122 +4,62 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
 import { supabase } from "@/lib/supabase-client"
-
 import ImageUpload from "@/components/image-upload"
 import type { UploadedImage } from "@/components/image-upload"
 import Header from "@/components/header"
 import { uploadImagesToSupabase } from "@/lib/uploadImageToSupabase"
+import { Subdivision, Risk } from '@/types/type'
 
-// Form state
-  type FormData = {
-    price: string
-    name: string
-    buildingType: string
-    grossArea: string
-    netArea: string
-    rooms: number
-    bathrooms: number
-    floor: string
-    direction: string
-    maintenanceFee: number
-    approvalDate: string
-    loanAvailable: boolean
-    moveInDate: string
-    petAllowed: boolean
-    parkingSpaces: string
-    elevator: boolean
-    description: string
-    address: string
-    locationDetails: string
-  }
-// Legal checkboxes state
-  type LegalChecks = {
-    가처분: boolean
-    가압류: boolean
-    압류: boolean
-    가등기: boolean
-    경매개시결정: boolean
-    임차권등기: boolean
-    신탁부동산: boolean
-    체납이력: boolean
-  }
-  const convertLegalChecks = (original: LegalChecks) => ({
-    injunction: original["가처분"],
-    provisionalSeizure: original["가압류"],
-    seizure: original["압류"],
-    provisionalRegistration: original["가등기"],
-    auctionStarted: original["경매개시결정"],
-    leaseRegistration: original["임차권등기"],
-    trustProperty: original["신탁부동산"],
-    taxDelinquency: original["체납이력"],
-  })
-  
-// Images state
-  // type UploadedImage = {
-  //   id?: string
-  //   url: string
-  //   file?: File
-  // }
-export type UploadedImageWithUrl = UploadedImage & {
-  url: string
-}
-
-
-
-  
-
-export default function PropertyUploadPage() {
-  const { user, session, isLoading, profile } = useAuth()
+export default function SubdivisionUploadPage() {
+  const { user, session, isLoading } = useAuth()
   const [submitting, setSubmitting] = useState(false)
   const router = useRouter()
 
-  const [formData, setFormData] = useState<FormData>({
-    price: "",
-    name: "",
-    buildingType: "",
-    grossArea: "",
-    netArea: "",
-    rooms: 0,
-    bathrooms: 0,
-    floor: "",
-    direction: "남향",
-    maintenanceFee: 0,
-    approvalDate: "",
-    loanAvailable: false,
-    moveInDate: "",
-    petAllowed: false,
-    parkingSpaces: "",
-    elevator: false,
+  const [formData, setFormData] = useState<Subdivision>({
+    subdivision_name: "",
+    area: "",
+    title: "",
+    property_type: "",
+    price: 0,
     description: "",
     address: "",
-    locationDetails: "",
-  })
-
-  // Tags state
-  const [selectedTags, setSelectedTags] = useState<number[]>([])
-  const availableTags = [
-    { id: 1, name: "보증보험가입가능", color: "#f37021" },
-    { id: 2, name: "안전검증완료", color: "#4CAF50" },
-  ]
-
-  const [legalChecks, setLegalChecks] = useState<LegalChecks>({
-    가처분: false,
-    가압류: false,
-    압류: false,
-    가등기: false,
-    경매개시결정: false,
-    임차권등기: false,
-    신탁부동산: false,
-    체납이력: false,
+    units_number: 0,
+    building_number: 0,
+    move_in_date: "",
+    sales_start_date: "",
+    size: [],
+    up_floor: 0,
+    down_floor: 0,
+    parking: "",
+    building_coverage_ratio: "",
+    floor_area_ratio: "",
+    land_type: "",
+    developer: "",
+    constructor: "",
+    agency: "",
+    trust_company: "",
+    is_price_limit: false,
+    amenities: [],
+    communityes: [],
+    tags: [false, false, false],
+    risk: {
+      "전매제한 여부": false,
+      "전매제한 기간": "",
+      "실거주 의무 여부": false,
+      "실거주 의무 기간": "",
+      "역세권": "",
+      "학군": "",
+      "착공일": "",
+      "규제 지역 여부": false,
+      "계약금 비율": 0
+    },
+    images: []
   })
 
   const [images, setImages] = useState<UploadedImage[]>([])
-  //const [floorPlanImage, setFloorPlanImage] = useState<UploadedImage | null>(null)
 
   useEffect(() => {
-    // Check if user is authenticated and is a landlord
     if (!isLoading) {
-      
       console.log("user:", user)
     }
   }, [isLoading, session, user, router])
@@ -128,11 +68,13 @@ export default function PropertyUploadPage() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const target = e.target
-    const name = target.name as keyof typeof formData
+    const name = target.name as keyof Subdivision
   
     const value =
       target.type === "checkbox"
         ? (target as HTMLInputElement).checked
+        : target.type === "number"
+        ? Number(target.value)
         : target.value
   
     setFormData((prev) => ({
@@ -140,20 +82,45 @@ export default function PropertyUploadPage() {
       [name]: value,
     }))
   }
-  
-  const handleTagToggle = (tagId: number) => {
-    if (selectedTags.includes(tagId)) {
-      setSelectedTags(selectedTags.filter((id) => id !== tagId))
-    } else {
-      setSelectedTags([...selectedTags, tagId])
-    }
-  }
 
-  const handleLegalCheckChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target
-    setLegalChecks({
-      ...legalChecks,
-      [name]: checked,
+  const handleRiskChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const target = e.target
+    const name = target.name as keyof Risk
+  
+    const value =
+      target.type === "checkbox"
+        ? (target as HTMLInputElement).checked
+        : target.type === "number"
+        ? Number(target.value)
+        : target.value
+  
+    setFormData((prev) => {
+      if (!prev.risk) {
+        return {
+          ...prev,
+          risk: {
+            "전매제한 여부": false,
+            "전매제한 기간": "",
+            "실거주 의무 여부": false,
+            "실거주 의무 기간": "",
+            "역세권": "",
+            "학군": "",
+            "착공일": "",
+            "규제 지역 여부": false,
+            "계약금 비율": 0,
+            [name]: value
+          }
+        }
+      }
+      return {
+        ...prev,
+        risk: {
+          ...prev.risk,
+          [name]: value
+        }
+      }
     })
   }
 
@@ -167,36 +134,21 @@ export default function PropertyUploadPage() {
 
     setSubmitting(true)
 
-    console.log("Form data:", formData)
-    console.log(typeof formData)
-    console.log("images:", images)
-
     try {
-      const uploaded = await uploadImagesToSupabase(images, user?.id || "")
-      const imageUrls = uploaded.map((img) => img.url)
-      console.log("Uploaded image URLs:", imageUrls)
-      console.log(typeof imageUrls)
-      console.log("Selected tags:", selectedTags)
-      console.log("Legal checks:", legalChecks)
-      await supabase.from('properties').insert([
+      const imageUrls = await uploadImagesToSupabase(images)
+      
+      await supabase.from('subdivisions').insert([
         {
           ...formData,
-          landlord_id: user?.id,
-          landlord_email: user?.email,
-          landlord_nickname: profile?.nickname,
           images: imageUrls,
-          tags: selectedTags,
-          legalchecks: convertLegalChecks(legalChecks),
         },
       ])
-      
 
-      alert("매물이 성공적으로 등록되었습니다!")
-      // Redirect to dashboard or property listing page
-      //router.push("/")
+      alert("분양이 성공적으로 등록되었습니다!")
+      router.push("/")
     } catch (error) {
       console.error("Error submitting form:", error)
-      alert("매물 등록 중 오류가 발생했습니다. 다시 시도해주세요.")
+      alert("분양 등록 중 오류가 발생했습니다. 다시 시도해주세요.")
     } finally {
       setSubmitting(false)
     }
@@ -210,483 +162,735 @@ export default function PropertyUploadPage() {
     )
   }
 
-  // If no session or not a landlord, the useEffect will redirect
-
-
-  // Rest of the component remains the same as before
-  // ...
-
   return (
     <>
-    <Header />
-    <div className="min-h-screen pt-16 ">
-      <main className="container mx-auto max-w-7xl px-4 py-8">
-        {/* Form content remains the same as before */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">매물 등록하기</h1>
-          <p className="text-gray-600">부동산 매물 정보를 입력해주세요.</p>
-        </div>
+      <Header />
+      <div className="min-h-screen pt-16">
+        <main className="container mx-auto max-w-7xl px-4 py-8">
+          <div className="mb-6">
+            <h1 className="text-2xl font-bold text-gray-900">분양 등록하기</h1>
+            <p className="text-gray-600">분양 정보를 입력해주세요.</p>
+          </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Form sections remain the same */}
-          {/* ... */}
-
-          {/* Basic Property Information */}
-          <section className="rounded-lg bg-white py-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-800">기본 정보</h2>
-            <div className="grid gap-6 md:grid-cols-2">
-              <div>
-                <label htmlFor="price" className="mb-1 block text-sm font-medium text-gray-700">
-                  가격 (만원) <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="price"
-                  name="price"
-                  type="number"
-                  required
-                  value={formData.price}
-                  onChange={handleInputChange}
-                  placeholder="예: 5000"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700">
-                  매물명 <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  placeholder="예: 강남 역세권 신축 아파트"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="buildingType" className="mb-1 block text-sm font-medium text-gray-700">
-                  건물 유형 <span className="text-red-500">*</span>
-                </label>
-                <select
-                  id="buildingType"
-                  name="buildingType"
-                  required
-                  value={formData.buildingType}
-                  onChange={handleInputChange}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                >
-                  <option value="">선택해주세요</option>
-                  <option value="아파트">아파트</option>
-                  <option value="오피스텔">오피스텔</option>
-                  <option value="빌라">빌라</option>
-                  <option value="단독주택">단독주택</option>
-                  <option value="상가">상가</option>
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="grossArea" className="mb-1 block text-sm font-medium text-gray-700">
-                  공급면적 (m²) <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="grossArea"
-                  name="grossArea"
-                  type="number"
-                  step="0.01"
-                  required
-                  value={formData.grossArea}
-                  onChange={handleInputChange}
-                  placeholder="예: 84.12"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="netArea" className="mb-1 block text-sm font-medium text-gray-700">
-                  전용면적 (m²) <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="netArea"
-                  name="netArea"
-                  type="number"
-                  step="0.01"
-                  required
-                  value={formData.netArea}
-                  onChange={handleInputChange}
-                  placeholder="예: 59.5"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="rooms" className="mb-1 block text-sm font-medium text-gray-700">
-                  방 개수 <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="rooms"
-                  name="rooms"
-                  type="number"
-                  required
-                  value={formData.rooms}
-                  onChange={handleInputChange}
-                  placeholder="예: 3"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="bathrooms" className="mb-1 block text-sm font-medium text-gray-700">
-                  욕실 개수 <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="bathrooms"
-                  name="bathrooms"
-                  type="number"
-                  required
-                  value={formData.bathrooms}
-                  onChange={handleInputChange}
-                  placeholder="예: 2"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="floor" className="mb-1 block text-sm font-medium text-gray-700">
-                  층수 <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="floor"
-                  name="floor"
-                  type="text"
-                  required
-                  value={formData.floor}
-                  onChange={handleInputChange}
-                  placeholder="예: 8층 / 지하 1층"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="direction" className="mb-1 block text-sm font-medium text-gray-700">
-                  방향 <span className="text-red-500">*</span>
-                </label>
-                <select
-                  id="direction"
-                  name="direction"
-                  required
-                  value={formData.direction}
-                  onChange={handleInputChange}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                >
-                  <option value="남향">남향</option>
-                  <option value="북향">북향</option>
-                  <option value="동향">동향</option>
-                  <option value="서향">서향</option>
-                  <option value="남동향">남동향</option>
-                  <option value="남서향">남서향</option>
-                  <option value="북동향">북동향</option>
-                  <option value="북서향">북서향</option>
-                </select>
-              </div>
-            </div>
-          </section>
-
-          {/* Additional Property Details */}
-          <section className="rounded-lg bg-white py-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-800">추가 정보</h2>
-            <div className="grid gap-6 md:grid-cols-2">
-              <div>
-                <label htmlFor="maintenanceFee" className="mb-1 block text-sm font-medium text-gray-700">
-                  관리비 (만원/월)
-                </label>
-                <input
-                  id="maintenanceFee"
-                  name="maintenanceFee"
-                  type="number"
-                  value={formData.maintenanceFee}
-                  onChange={handleInputChange}
-                  placeholder="예: 10"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="approvalDate" className="mb-1 block text-sm font-medium text-gray-700">
-                  준공일
-                </label>
-                <input
-                  id="approvalDate"
-                  name="approvalDate"
-                  type="date"
-                  value={formData.approvalDate}
-                  onChange={handleInputChange}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="moveInDate" className="mb-1 block text-sm font-medium text-gray-700">
-                  입주 가능일
-                </label>
-                <input
-                  id="moveInDate"
-                  name="moveInDate"
-                  type="date"
-                  value={formData.moveInDate}
-                  onChange={handleInputChange}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="parkingSpaces" className="mb-1 block text-sm font-medium text-gray-700">
-                  주차 공간
-                </label>
-                <input
-                  id="parkingSpaces"
-                  name="parkingSpaces"
-                  type="number"
-                  value={formData.parkingSpaces}
-                  onChange={handleInputChange}
-                  placeholder="예: 1"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <input
-                  id="loanAvailable"
-                  name="loanAvailable"
-                  type="checkbox"
-                  checked={formData.loanAvailable}
-                  onChange={handleInputChange}
-                  className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
-                />
-                <label htmlFor="loanAvailable" className="text-sm font-medium text-gray-700">
-                  대출 가능
-                </label>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <input
-                  id="petAllowed"
-                  name="petAllowed"
-                  type="checkbox"
-                  checked={formData.petAllowed}
-                  onChange={handleInputChange}
-                  className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
-                />
-                <label htmlFor="petAllowed" className="text-sm font-medium text-gray-700">
-                  반려동물 가능
-                </label>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <input
-                  id="elevator"
-                  name="elevator"
-                  type="checkbox"
-                  checked={formData.elevator}
-                  onChange={handleInputChange}
-                  className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
-                />
-                <label htmlFor="elevator" className="text-sm font-medium text-gray-700">
-                  엘리베이터
-                </label>
-              </div>
-            </div>
-          </section>
-
-          {/* Location Information */}
-          <section className="rounded-lg bg-white py-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-800">위치 정보</h2>
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="address" className="mb-1 block text-sm font-medium text-gray-700">
-                  주소 <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="address"
-                  name="address"
-                  type="text"
-                  required
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  placeholder="예: 서울시 강남구 테헤란로 123"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="locationDetails" className="mb-1 block text-sm font-medium text-gray-700">
-                  위치 상세 정보
-                </label>
-                <input
-                  id="locationDetails"
-                  name="locationDetails"
-                  type="text"
-                  value={formData.locationDetails}
-                  onChange={handleInputChange}
-                  placeholder="예: 강남역에서 도보 10분 거리"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
-            </div>
-          </section>
-
-          {/* Description */}
-          <section className="rounded-lg bg-white py-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-800">상세 설명</h2>
-            <div>
-              <label htmlFor="description" className="mb-1 block text-sm font-medium text-gray-700">
-                매물 설명 <span className="text-red-500">*</span>
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                rows={5}
-                required
-                value={formData.description}
-                onChange={handleInputChange}
-                placeholder="매물에 대한 상세한 설명을 입력해주세요."
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-              />
-            </div>
-          </section>
-
-          {/* Image Upload */}
-          <section className="rounded-lg bg-white py-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-800">사진 업로드</h2>
-            <div className="space-y-6">
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">
-                  매물 사진 (최소 3장) <span className="text-red-500">*</span>
-                </label>
-                <ImageUpload
-                  images={images}
-                  setImages={setImages}
-                  maxFiles={10}
-                  label="사진을 여기에 끌어다 놓거나 클릭하여 업로드하세요"
-                />
-                {images.length > 0 && (
-                  <p className="mt-2 text-sm text-gray-500">
-                    {images.length}장의 사진이 업로드되었습니다 (최소 3장 필요)
-                  </p>
-                )}
-              </div>
-
-              {/* <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">평면도 (선택사항)</label>
-                <ImageUpload
-                  images={floorPlanImage ? [floorPlanImage] : []}
-                  setImages={(imgs: UploadedImage[]) => setFloorPlanImage(imgs[0] || null)}
-                  maxFiles={1}
-                  label="평면도를 여기에 끌어다 놓거나 클릭하여 업로드하세요"
-                />
-              </div> */}
-            </div>
-          </section>
-
-          {/* Tags */}
-          <section className="rounded-lg bg-white py-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-800">태그</h2>
-            <div className="flex flex-wrap gap-2">
-              {availableTags.map((tag) => (
-                <button
-                  key={tag.id}
-                  type="button"
-                  onClick={() => handleTagToggle(tag.id)}
-                  className={`rounded-full px-4 py-2 text-sm font-medium text-white transition-colors ${
-                    selectedTags.includes(tag.id) ? `bg-opacity-100` : `bg-opacity-60 hover:bg-opacity-80`
-                  }`}
-                  style={{ backgroundColor: tag.color }}
-                >
-                  {tag.name}
-                </button>
-              ))}
-            </div>
-          </section>
-
-          {/* Legal Analysis */}
-          <section className="rounded-lg bg-white py-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-800">법적 분석</h2>
-            <p className="mb-4 text-sm text-gray-600">해당 매물에 적용되는 법적 상태를 모두 체크해주세요.</p>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {(Object.keys(legalChecks) as (keyof LegalChecks)[]).map((check) => (
-                <div key={check} className="flex items-center space-x-2">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Basic Information */}
+            <section className="rounded-lg bg-white py-6">
+              <h2 className="mb-4 text-xl font-semibold text-gray-800">기본 정보</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div>
+                  <label htmlFor="subdivision_name" className="mb-1 block text-sm font-medium text-gray-700">
+                    사업명 <span className="text-red-500">*</span>
+                  </label>
                   <input
-                    id={check}
-                    name={check}
+                    id="subdivision_name"
+                    name="subdivision_name"
+                    type="text"
+                    required
+                    value={formData.subdivision_name || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="area" className="mb-1 block text-sm font-medium text-gray-700">
+                    사업지/권역 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="area"
+                    name="area"
+                    type="text"
+                    value={formData.area || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="title" className="mb-1 block text-sm font-medium text-gray-700">
+                    사업병 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="title"
+                    name="title"
+                    type="text"
+                    value={formData.title || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="property_type" className="mb-1 block text-sm font-medium text-gray-700">
+                    건축물용도 <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="property_type"
+                    name="property_type"
+                    value={formData.property_type || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  >
+                    <option value="">선택해주세요</option>
+                    <option value="아파트">아파트</option>
+                    <option value="오피스텔">오피스텔</option>
+                    <option value="빌라">빌라</option>
+                    <option value="단독주택">단독주택</option>
+                    <option value="상가">상가</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="price" className="mb-1 block text-sm font-medium text-gray-700">
+                    가격 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="price"
+                    name="price"
+                    type="number"
+                    value={formData.price || 0}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="address" className="mb-1 block text-sm font-medium text-gray-700">
+                    주소 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="address"
+                    name="address"
+                    type="text"
+                    value={formData.address || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+              </div>
+            </section>
+
+            {/* Property Information */}
+            <section className="rounded-lg bg-white py-6">
+              <h2 className="mb-4 text-xl font-semibold text-gray-800">부동산 정보</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div>
+                  <label htmlFor="units_number" className="mb-1 block text-sm font-medium text-gray-700">
+                    전체 세대수 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="units_number"
+                    name="units_number"
+                    type="number"
+                    value={formData.units_number || 0}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="building_number" className="mb-1 block text-sm font-medium text-gray-700">
+                    동 개수 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="building_number"
+                    name="building_number"
+                    type="number"
+                    value={formData.building_number || 0}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="move_in_date" className="mb-1 block text-sm font-medium text-gray-700">
+                    입주 예정일 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="move_in_date"
+                    name="move_in_date"
+                    type="date"
+                    value={formData.move_in_date || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="sales_start_date" className="mb-1 block text-sm font-medium text-gray-700">
+                    분양 시작일 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="sales_start_date"
+                    name="sales_start_date"
+                    type="date"
+                    value={formData.sales_start_date || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="up_floor" className="mb-1 block text-sm font-medium text-gray-700">
+                    지상 층수 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="up_floor"
+                    name="up_floor"
+                    type="number"
+                    value={formData.up_floor || 0}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="down_floor" className="mb-1 block text-sm font-medium text-gray-700">
+                    지하 층수 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="down_floor"
+                    name="down_floor"
+                    type="number"
+                    value={formData.down_floor || 0}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="parking" className="mb-1 block text-sm font-medium text-gray-700">
+                    주차(평균 주차대수) <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="parking"
+                    name="parking"
+                    type="text"
+                    value={formData.parking || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="building_coverage_ratio" className="mb-1 block text-sm font-medium text-gray-700">
+                    건폐율(BCR) <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="building_coverage_ratio"
+                    name="building_coverage_ratio"
+                    type="text"
+                    value={formData.building_coverage_ratio || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="floor_area_ratio" className="mb-1 block text-sm font-medium text-gray-700">
+                    용적율(FAR) <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="floor_area_ratio"
+                    name="floor_area_ratio"
+                    type="text"
+                    value={formData.floor_area_ratio || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="land_type" className="mb-1 block text-sm font-medium text-gray-700">
+                    택지 유형 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="land_type"
+                    name="land_type"
+                    type="text"
+                    value={formData.land_type || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+              </div>
+            </section>
+
+            {/* Company Information */}
+            <section className="rounded-lg bg-white py-6">
+              <h2 className="mb-4 text-xl font-semibold text-gray-800">회사 정보</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div>
+                  <label htmlFor="developer" className="mb-1 block text-sm font-medium text-gray-700">
+                    시행사 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="developer"
+                    name="developer"
+                    type="text"
+                    value={formData.developer || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="constructor" className="mb-1 block text-sm font-medium text-gray-700">
+                    시공사 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="constructor"
+                    name="constructor"
+                    type="text"
+                    value={formData.constructor || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="agency" className="mb-1 block text-sm font-medium text-gray-700">
+                    대행사 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="agency"
+                    name="agency"
+                    type="text"
+                    value={formData.agency || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="trust_company" className="mb-1 block text-sm font-medium text-gray-700">
+                    신탁사 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="trust_company"
+                    name="trust_company"
+                    type="text"
+                    value={formData.trust_company || ""}
+                    onChange={handleInputChange}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+              </div>
+            </section>
+
+            {/* Risk Information */}
+            <section className="rounded-lg bg-white py-6">
+              <h2 className="mb-4 text-xl font-semibold text-gray-800">위험 정보</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="flex items-center space-x-2">
+                  <input
+                    id="전매제한 여부"
+                    name="전매제한 여부"
                     type="checkbox"
-                    checked={legalChecks[check]}
-                    onChange={handleLegalCheckChange}
+                    checked={formData.risk?.["전매제한 여부"] || false}
+                    onChange={handleRiskChange}
                     className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
                   />
-                  <label htmlFor={check} className="text-sm font-medium text-gray-700">
-                    {check}
+                  <label htmlFor="전매제한 여부" className="text-sm font-medium text-gray-700">
+                    전매제한 여부
                   </label>
                 </div>
-              ))}
-            </div>
-          </section>
 
-          {/* Landlord Information */}
-          <section className="rounded-lg bg-white py-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-800">임대인 정보</h2>
-            <div className="flex items-center space-x-4">
-              <div className="h-12 w-12 overflow-hidden rounded-full bg-gray-200">
-                {/* Profile photo would go here */}
-                <svg className="h-full w-full text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500">
-                  {user?.user_metadata.role === "landlord" ? "임대인 (Landlord)" : ""}
-                </p>
-              </div>
-            </div>
-          </section>
+                <div>
+                  <label htmlFor="전매제한 기간" className="mb-1 block text-sm font-medium text-gray-700">
+                    전매제한 기간
+                  </label>
+                  <input
+                    id="전매제한 기간"
+                    name="전매제한 기간"
+                    type="text"
+                    value={formData.risk?.["전매제한 기간"] || ""}
+                    onChange={handleRiskChange}
+                    placeholder="예: 5년"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
 
-          {/* Submit Button */}
-          <div className="flex justify-end">
-            <button
-              type="submit"
-              disabled={submitting}
-              className={`rounded-md bg-orange-500 px-6 py-3 text-base font-medium text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 ${
-                submitting ? "cursor-not-allowed opacity-70" : ""
-              }`}
-            >
-              {submitting ? "등록 중..." : "매물 등록하기"}
-            </button>
-          </div>
-        </form>
-      </main>
-    </div>
+                <div className="flex items-center space-x-2">
+                  <input
+                    id="실거주 의무 여부"
+                    name="실거주 의무 여부"
+                    type="checkbox"
+                    checked={formData.risk?.["실거주 의무 여부"] || false}
+                    onChange={handleRiskChange}
+                    className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                  />
+                  <label htmlFor="실거주 의무 여부" className="text-sm font-medium text-gray-700">
+                    실거주 의무 여부
+                  </label>
+                </div>
+
+                <div>
+                  <label htmlFor="실거주 의무 기간" className="mb-1 block text-sm font-medium text-gray-700">
+                    실거주 의무 기간
+                  </label>
+                  <input
+                    id="실거주 의무 기간"
+                    name="실거주 의무 기간"
+                    type="text"
+                    value={formData.risk?.["실거주 의무 기간"] || ""}
+                    onChange={handleRiskChange}
+                    placeholder="예: 3년"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="역세권" className="mb-1 block text-sm font-medium text-gray-700">
+                    역세권
+                  </label>
+                  <input
+                    id="역세권"
+                    name="역세권"
+                    type="text"
+                    value={formData.risk?.["역세권"] || ""}
+                    onChange={handleRiskChange}
+                    placeholder="예: 강남역 도보 10분"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="학군" className="mb-1 block text-sm font-medium text-gray-700">
+                    학군
+                  </label>
+                  <input
+                    id="학군"
+                    name="학군"
+                    type="text"
+                    value={formData.risk?.["학군"] || ""}
+                    onChange={handleRiskChange}
+                    placeholder="예: 강남초등학교"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="착공일" className="mb-1 block text-sm font-medium text-gray-700">
+                    착공일
+                  </label>
+                  <input
+                    id="착공일"
+                    name="착공일"
+                    type="text"
+                    value={formData.risk?.["착공일"] || ""}
+                    onChange={handleRiskChange}
+                    placeholder="예: 2024년 3월 1일"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <input
+                    id="규제 지역 여부"
+                    name="규제 지역 여부"
+                    type="checkbox"
+                    checked={formData.risk?.["규제 지역 여부"] || false}
+                    onChange={handleRiskChange}
+                    className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                  />
+                  <label htmlFor="규제 지역 여부" className="text-sm font-medium text-gray-700">
+                    규제 지역 여부
+                  </label>
+                </div>
+
+                <div>
+                  <label htmlFor="계약금 비율" className="mb-1 block text-sm font-medium text-gray-700">
+                    계약금 비율
+                  </label>
+                  <input
+                    id="계약금 비율"
+                    name="계약금 비율"
+                    type="number"
+                    value={formData.risk?.["계약금 비율"] || 0}
+                    onChange={handleRiskChange}
+                    placeholder="예: 20"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                </div>
+              </div>
+            </section>
+
+            {/* Tags */}
+            <section className="rounded-lg bg-white py-6">
+              <h2 className="mb-4 text-xl font-semibold text-gray-800">태그</h2>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2">
+                  <input
+                    id="tag1"
+                    type="checkbox"
+                    checked={formData.tags?.[0] || false}
+                    onChange={(e) => {
+                      const newTags = [...(formData.tags || [false, false, false])]
+                      newTags[0] = e.target.checked
+                      setFormData(prev => ({ ...prev, tags: newTags }))
+                    }}
+                    className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                  />
+                  <label htmlFor="tag1" className="text-sm font-medium text-gray-700">
+                    즉시입주
+                  </label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <input
+                    id="tag2"
+                    type="checkbox"
+                    checked={formData.tags?.[1] || false}
+                    onChange={(e) => {
+                      const newTags = [...(formData.tags || [false, false, false])]
+                      newTags[1] = e.target.checked
+                      setFormData(prev => ({ ...prev, tags: newTags }))
+                    }}
+                    className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                  />
+                  <label htmlFor="tag2" className="text-sm font-medium text-gray-700">
+                    전매여부
+                  </label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <input
+                    id="tag3"
+                    type="checkbox"
+                    checked={formData.tags?.[2] || false}
+                    onChange={(e) => {
+                      const newTags = [...(formData.tags || [false, false, false])]
+                      newTags[2] = e.target.checked
+                      setFormData(prev => ({ ...prev, tags: newTags }))
+                    }}
+                    className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                  />
+                  <label htmlFor="tag3" className="text-sm font-medium text-gray-700">
+                    다주택여부
+                  </label>
+                </div>
+              </div>
+            </section>
+
+            {/* Size */}
+            <section className="rounded-lg bg-white py-6">
+              <h2 className="mb-4 text-xl font-semibold text-gray-800">평형 정보</h2>
+              <div className="space-y-4">
+                {formData.size?.map((size, index) => (
+                  <div key={index} className="grid gap-4 md:grid-cols-3">
+                    <div>
+                      <label className="mb-1 block text-sm font-medium text-gray-700">
+                        평형
+                      </label>
+                      <input
+                        type="text"
+                        value={size.type}
+                        onChange={(e) => {
+                          const newSize = [...(formData.size || [])]
+                          newSize[index] = {
+                            ...size,
+                            type: e.target.value
+                          }
+                          setFormData(prev => ({ ...prev, size: newSize }))
+                        }}
+                        className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-1 block text-sm font-medium text-gray-700">
+                        세대 수
+                      </label>
+                      <input
+                        type="number"
+                        value={size.units}
+                        onChange={(e) => {
+                          const newSize = [...(formData.size || [])]
+                          newSize[index] = {
+                            ...size,
+                            units: Number(e.target.value)
+                          }
+                          setFormData(prev => ({ ...prev, size: newSize }))
+                        }}
+                        className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-1 block text-sm font-medium text-gray-700">
+                        분양가 (만원)
+                      </label>
+                      <input
+                        type="number"
+                        value={size.price}
+                        onChange={(e) => {
+                          const newSize = [...(formData.size || [])]
+                          newSize[index] = {
+                            ...size,
+                            price: Number(e.target.value)
+                          }
+                          setFormData(prev => ({ ...prev, size: newSize }))
+                        }}
+                        className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                      />
+                    </div>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFormData(prev => ({
+                      ...prev,
+                      size: [...(prev.size || []), { type: "", units: 0, price: 0 }]
+                    }))
+                  }}
+                  className="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  평형 추가
+                </button>
+              </div>
+            </section>
+
+            {/* Amenities */}
+            <section className="rounded-lg bg-white py-6">
+              <h2 className="mb-4 text-xl font-semibold text-gray-800">편의시설</h2>
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <input
+                    type="text"
+                    id="newAmenity"
+                    placeholder="편의시설을 입력하세요"
+                    className="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const input = document.getElementById('newAmenity') as HTMLInputElement
+                      const newAmenity = input.value.trim()
+                      if (newAmenity && !formData.amenities?.includes(newAmenity)) {
+                        setFormData(prev => ({
+                          ...prev,
+                          amenities: [...(prev.amenities || []), newAmenity]
+                        }))
+                        input.value = ''
+                      }
+                    }}
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    추가
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {formData.amenities?.map((amenity, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full"
+                    >
+                      <span className="text-sm">{amenity}</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData(prev => ({
+                            ...prev,
+                            amenities: (prev.amenities || []).filter((_, i) => i !== index)
+                          }))
+                        }}
+                        className="text-gray-500 hover:text-gray-700"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Communities */}
+            <section className="rounded-lg bg-white py-6">
+              <h2 className="mb-4 text-xl font-semibold text-gray-800">커뮤니티</h2>
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <input
+                    type="text"
+                    id="newCommunity"
+                    placeholder="커뮤니티 시설을 입력하세요"
+                    className="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const input = document.getElementById('newCommunity') as HTMLInputElement
+                      const newCommunity = input.value.trim()
+                      if (newCommunity && !formData.communityes?.includes(newCommunity)) {
+                        setFormData(prev => ({
+                          ...prev,
+                          communityes: [...(prev.communityes || []), newCommunity]
+                        }))
+                        input.value = ''
+                      }
+                    }}
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    추가
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {formData.communityes?.map((community, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full"
+                    >
+                      <span className="text-sm">{community}</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData(prev => ({
+                            ...prev,
+                            communityes: (prev.communityes || []).filter((_, i) => i !== index)
+                          }))
+                        }}
+                        className="text-gray-500 hover:text-gray-700"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Image Upload */}
+            <section className="rounded-lg bg-white py-6">
+              <h2 className="mb-4 text-xl font-semibold text-gray-800">사진 업로드</h2>
+              <div className="space-y-6">
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-gray-700">
+                    매물 사진 (최소 3장) <span className="text-red-500">*</span>
+                  </label>
+                  <ImageUpload
+                    images={images}
+                    setImages={setImages}
+                    maxFiles={10}
+                    label="사진을 여기에 끌어다 놓거나 클릭하여 업로드하세요"
+                  />
+                  {images.length > 0 && (
+                    <p className="mt-2 text-sm text-gray-500">
+                      {images.length}장의 사진이 업로드되었습니다 (최소 3장 필요)
+                    </p>
+                  )}
+                </div>
+              </div>
+            </section>
+
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                disabled={submitting}
+                className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+              >
+                {submitting ? "등록 중..." : "등록하기"}
+              </button>
+            </div>
+          </form>
+        </main>
+      </div>
     </>
   )
 }
-
-
-/*
-누구? 임차인,임대인
-이름
-전화번호
-이메일
-주소 + 상세주소
-위치 부가설명 ㅇ)강남역 도보 10분
-가격
-매물사진
-방향
-매물면적(전용, 공급)
-방,욕실 개수
-전체층, 나의 층
-관리비
-관리비 별도로
-관리비 설명
-대출, 반려동물, 주차장(가능, 불가능, 확인필요)
-*/

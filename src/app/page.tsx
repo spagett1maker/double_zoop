@@ -4,17 +4,21 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ChevronRight, X, Filter } from "lucide-react"
-import { propertyService } from "@/app/api/get-properties"
-import { type House, HouseCard } from "@/components/ui/card"
+import { HouseCard } from "@/components/ui/card"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+
+import { supabase } from '@/lib/supabase';
+import { Subdivision } from '@/types/type';
 
 export default function Home() {
   const [majorRegion, setMajorRegion] = useState("서울")
   const [subRegion, setSubRegion] = useState("강남/역삼/삼성")
   const [showAllSubRegions, setShowAllSubRegions] = useState(false)
-  const [properties, setProperties] = useState<House[]>([])
+  const [subdivisions, setSubdivisions] = useState<Subdivision[]>([]);
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null);
+
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   // Major regions in Korea
@@ -35,25 +39,46 @@ export default function Home() {
     ],
   }
 
-  // Fetch properties when region changes
+  // // Fetch properties when region changes
+  // useEffect(() => {
+  //   const fetchProperties = async () => {
+  //     setLoading(true)
+  //     try {
+  //       const data = await propertyService.getProperties({
+  //         region: majorRegion,
+  //         district: showAllSubRegions ? undefined : subRegion,
+  //       })
+  //       setProperties(data)
+  //     } catch (error) {
+  //       console.error("Failed to fetch properties:", error)
+  //     } finally {
+  //       setLoading(false)
+  //     }
+  //   }
+
+  //   fetchProperties()
+  // }, [majorRegion, subRegion, showAllSubRegions])
+
   useEffect(() => {
-    const fetchProperties = async () => {
-      setLoading(true)
+    async function fetchSubdivisions() {
       try {
-        const data = await propertyService.getProperties({
-          region: majorRegion,
-          district: showAllSubRegions ? undefined : subRegion,
-        })
-        setProperties(data)
-      } catch (error) {
-        console.error("Failed to fetch properties:", error)
+        const { data, error } = await supabase
+          .from('subdivisions')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        setSubdivisions(data || []);
+        console.log(data)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : '데이터를 불러오는 중 오류가 발생했습니다.');
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     }
 
-    fetchProperties()
-  }, [majorRegion, subRegion, showAllSubRegions])
+    fetchSubdivisions();
+  }, []);
 
   // Close filter when clicking outside
   useEffect(() => {
@@ -112,6 +137,9 @@ export default function Home() {
       return subRegion
     }
   }
+
+  if (error) return <div>오류: {error}</div>;
+
 
   return (
     <>
@@ -275,13 +303,13 @@ export default function Home() {
               <div className="flex justify-center items-center h-64">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
               </div>
-            ) : properties.length === 0 ? (
+            ) : subdivisions.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-lg text-gray-500">해당 지역에 매물이 없습니다.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {properties.map((house) => (
+              <div className="grid grid-cols-3 gap-3 sm:gap-6">
+                {subdivisions.map((house) => (
                   <HouseCard key={house.id} house={house} />
                 ))}
               </div>

@@ -1,5 +1,3 @@
-
-
 "use client"
 
 import { useState, useCallback, Dispatch, SetStateAction } from "react"
@@ -11,14 +9,9 @@ export type UploadedImage = File & {
 
 type ImageUploadProps = {
   images: UploadedImage[]
-  //setImages: (images: UploadedImage[]) => void
   setImages: Dispatch<SetStateAction<UploadedImage[]>>
   maxFiles?: number
   label?: string
-}
-
-export type UploadedImageWithUrl = UploadedImage & {
-  url: string
 }
 
 export default function ImageUpload({ images, setImages, maxFiles = 10, label = "Upload images" }: ImageUploadProps) {
@@ -27,7 +20,6 @@ export default function ImageUpload({ images, setImages, maxFiles = 10, label = 
   const onDrop = useCallback(
     (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
       if (acceptedFiles?.length) {
-        // Convert files to objects with preview URLs
         const newImages = acceptedFiles.map(
           (file) =>
             Object.assign(file, {
@@ -35,11 +27,9 @@ export default function ImageUpload({ images, setImages, maxFiles = 10, label = 
             }) as UploadedImage,
         )
 
-        // If we're only allowing one file, replace the current images
         if (maxFiles === 1) {
           setImages(newImages)
         } else {
-          // Otherwise, add to the existing images (up to maxFiles)
           setImages((prevImages: UploadedImage[]) => {
             const combinedImages = [...prevImages, ...newImages]
             return combinedImages.slice(0, maxFiles)
@@ -63,7 +53,7 @@ export default function ImageUpload({ images, setImages, maxFiles = 10, label = 
       "image/*": [".jpeg", ".jpg", ".png", ".gif"],
     },
     maxFiles: maxFiles,
-    maxSize: 5 * 1024 * 1024, // 5MB
+    maxSize: 10 * 1024 * 1024, // 5MB
   })
 
   const removeImage = (index: number) => {

@@ -1,22 +1,19 @@
 import { supabase } from "@/lib/supabase-client"
-import type { UploadedImage, UploadedImageWithUrl } from "@/components/image-upload"
+import type { UploadedImage } from "@/components/image-upload"
 
 export const uploadImagesToSupabase = async (
   images: UploadedImage[],
-  userId: string
-): Promise<UploadedImageWithUrl[]> => {
-  const uploadedImages: UploadedImageWithUrl[] = []
-
-  if (!userId) {
-    throw new Error("User ID is required for uploading images.")
-  }
+  userId?: string
+): Promise<string[]> => {
+  const uploadedImageUrls: string[] = []
+  const tempUserId = userId || `temp-${Date.now()}`
 
   for (const image of images) {
     const fileExt = image.name.split(".").pop()
-    const filePath = `${userId}/${Date.now()}-${Math.random().toString(36).substr(2, 9)}.${fileExt}`
+    const filePath = `${tempUserId}/${Date.now()}-${Math.random().toString(36).substr(2, 9)}.${fileExt}`
 
     const { error: uploadError } = await supabase.storage
-      .from("property-images")
+      .from("subdivision-images")
       .upload(filePath, image)
 
     if (uploadError) {
@@ -25,19 +22,15 @@ export const uploadImagesToSupabase = async (
     }
 
     const { data } = supabase.storage
-      .from("property-images")
+      .from("subdivision-images")
       .getPublicUrl(filePath)
 
     if (!data?.publicUrl) {
       throw new Error("퍼블릭 URL을 가져올 수 없습니다.")
     }
 
-    uploadedImages.push({
-      ...image,
-      url: data.publicUrl,
-    })
+    uploadedImageUrls.push(data.publicUrl)
   }
-  console.log("업로드된 이미지:", uploadedImages)
 
-  return uploadedImages
+  return uploadedImageUrls
 }

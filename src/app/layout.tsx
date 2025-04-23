@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from 'next/script';
+
 
 import { AuthProvider } from "../contexts/auth-context";
 import ChannelService from "@/components/channel-talk";
@@ -32,6 +34,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Script
+          async
+          src='https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js'
+          integrity={"!!!integridy!!!"}
+          crossOrigin='anonymous'
+        ></Script>
         <Analytics />
         <SpeedInsights />
         <AuthProvider>
