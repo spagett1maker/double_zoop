@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useAuth } from "@/contexts/auth-context"
 import { supabase } from "@/lib/supabase-client"
 import ImageUpload from "@/components/image-upload"
 import type { UploadedImage } from "@/components/image-upload"
@@ -11,7 +10,6 @@ import { uploadImagesToSupabase } from "@/lib/uploadImageToSupabase"
 import { Subdivision, Risk } from '@/types/type'
 
 export default function SubdivisionUploadPage() {
-  const { user, session, isLoading } = useAuth()
   const [submitting, setSubmitting] = useState(false)
   const router = useRouter()
 
@@ -59,19 +57,13 @@ export default function SubdivisionUploadPage() {
 
   const [images, setImages] = useState<UploadedImage[]>([])
 
-  useEffect(() => {
-    if (!isLoading) {
-      console.log("user:", user)
-    }
-  }, [isLoading, session, user, router])
-
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const target = e.target
     const name = target.name as keyof Subdivision
   
-    const value =
+    const value =                                                               
       target.type === "checkbox"
         ? (target as HTMLInputElement).checked
         : target.type === "number"
@@ -155,13 +147,6 @@ export default function SubdivisionUploadPage() {
     }
   }
 
-  if (isLoading) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-orange-500 border-t-transparent"></div>
-      </div>
-    )
-  }
 
   return (
     <>
