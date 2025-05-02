@@ -53,28 +53,30 @@ export function HouseCard({ house }: { house: Subdivision }) {
         </div>
         <div className="flex gap-2 py-[2px]">
           {house.tags?.[0] && (
-            <div className="flex items-center gap-1 text-[12px] bg-[#e7f9f3] text-[#068C6D] font-medium rounded-lg py-1 px-2">
+            <div className="flex items-center gap-1 text-[12px] bg-blue-100 text-blue-500 font-medium rounded-lg py-1 px-2">
               {/* <House className="w-4 h-4 text-[#068C6D]" />  */} 즉시입주
             </div>
           )}
           {house.tags?.[1] ? (
-            <div className="flex items-center gap-1 text-[12px] bg-[#e7f9f3] text-[#068C6D] font-medium rounded-lg py-1 px-2">
+            <div className="flex items-center gap-1 text-[12px] bg-blue-100 text-blue-500 font-medium rounded-lg py-1 px-2">
               {/* <House className="w-4 h-4 text-[#068C6D]" /> 전매가능 */} 전매가능
             </div>
           ) : (
-            <div className="flex items-center gap-1 text-[12px] bg-[#ffddc8] text-[#f37021] font-medium rounded-lg py-1 px-2">
+            <div className="flex items-center gap-1 text-[12px] bg-red-100 text-red-500 font-medium rounded-lg py-1 px-2">
               {/* <House className="w-4 h-4 text-[#f37021]" /> 전매제한 */} 전매제한
             </div>
           )}
           {house.tags?.[2] ? (
-            <div className="flex items-center gap-1 text-[12px] bg-[#e7f9f3] text-[#068C6D] font-medium rounded-lg py-1 px-2">
-              {/* <House className="w-4 h-4 text-[#068C6D]" /> 다주택 가능 */} 다주택 가능
+            <div className="flex items-center gap-1 text-[12px] bg-blue-100 text-blue-500 font-medium rounded-lg py-1 px-2">
+              {/* <House className="w-4 h-4 text-[#068C6D]" /> 다주택 가능 */} 분양가 상한제
             </div>
-          ) : (
-            <div className="flex items-center gap-1 text-[12px] bg-[#ffddc8] text-[#f37021] font-medium rounded-lg py-1 px-2">
-              {/* <House className="w-4 h-4 text-[#f37021]" /> 다주택 불가능 */} 다주택 불가능
+          ) 
+          : (
+            <div className="hidden  flex items-center gap-1 text-[12px] bg-[#ffddc8] text-[#f37021] font-medium rounded-lg py-1 px-2">
+              {/* <House className="w-4 h-4 text-[#f37021]" /> 다주택 불가능 */} 다주택 불가능 
             </div>
-          )}
+          )
+          }
         </div>
         
         <div className="relative">

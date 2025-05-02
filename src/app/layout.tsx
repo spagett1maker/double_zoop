@@ -20,8 +20,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ZOOP ZOOP | 아파트 분양 정보는 줍줍",
-  description: "아파트 분양 정보는 줍줍",
+  title: "ZOOP ZOOP | 아파트 청약 정보는 줍줍",
+  description: "아파트 청약 정보는 줍줍",
   other: {
     "naver-site-verification": "65b3740c4f59722100f6df5816f3cb4c00e507ee",
   }

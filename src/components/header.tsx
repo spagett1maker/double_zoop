@@ -104,9 +104,9 @@ export default function Header() {
         <div className="flex items-center">
           <Link href="/" className="mr-4 sm:mr-8 cursor-pointer flex flex-col items-center">
             <p className="text-xl sm:text-2xl font-bold">
-              <span className="text-orange-500">ZOOP</span> ZOOP
+              <span className="text-blue-400">ZOOP</span> ZOOP
             </p>
-            <p className="text-sm text-gray-500">아파트 분양 정보는 &apos;줍줍&apos;</p>
+            <p className="text-sm text-gray-500">아파트 청약 정보는 &apos;줍줍&apos;</p>
           </Link>
           
         </div>
@@ -115,7 +115,7 @@ export default function Header() {
             <Link href="/service" className="">
               <p className="hover:font-semibold">KA 한국자산관리</p>
             </Link>
-            <Link href="https://de7j3.channel.io/home" className="">
+            <Link href="https://zoopzoop.channel.io/home" className="">
               <p className="hover:font-semibold">문의하기</p>
             </Link>
           </nav>
@@ -132,7 +132,7 @@ export default function Header() {
                 로그인 
               </Link>
             )}
-            <button onClick={handleDownloadClick} className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md px-4 py-2 text-sm transition-colors ease-in-out cursor-pointer">
+            <button onClick={handleDownloadClick} className="bg-blue-400 hover:bg-blue-500 text-white font-semibold rounded-md px-4 py-2 text-sm transition-colors ease-in-out cursor-pointer">
               광고 문의하기
             </button>
           </div>

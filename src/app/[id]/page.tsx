@@ -123,8 +123,8 @@ export default function House() {
               <p className="text-sm text-gray-600 mb-4">분양 시 꼭 확인해야하는 요소들을 모아놨어요</p>
 
               <div className="bg-green-50 p-4 rounded-lg mb-6 flex items-center">
-                <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center mr-3">
-                  <span className="text-orange-500">✅</span>
+                <div className="w-6 h-6 rounded-full  flex items-center justify-center mr-3">
+                  <span className="">✅</span>
                 </div>
                 <div>
                   <p className="font-medium text-sm text-green-800">아파트 분양 시 아래 항목들을 꼭 확인하세요!</p>
@@ -189,7 +189,7 @@ export default function House() {
 
             <div className="mb-2">
               <h1 className="text-2xl font-bold">
-                <span className="text-orange-500">분양중</span> {formatPrice(subdivision.price || 0)} ~ {formatPrice(subdivision.size?.[subdivision.size.length - 1]?.price || 0)}
+                <span className="text-blue-400">분양중</span> {formatPrice(subdivision.price || 0)} ~ {formatPrice(subdivision.size?.[subdivision.size.length - 1]?.price || 0)}
               </h1>
             </div>
 
@@ -241,15 +241,6 @@ export default function House() {
                     <td className="py-2 text-gray-500">세대당 주차대수</td>
                     <td className="py-2 font-medium">{subdivision.parking}</td>
                   </tr>
-                  <tr className="border-b border-gray-100">
-                    <td className="py-2 text-gray-500">건폐율</td>
-                    <td className="py-2 font-medium">{subdivision.building_coverage_ratio}</td>
-                  </tr>
-
-                  <tr className="border-b border-gray-100">
-                    <td className="py-2 text-gray-500">용적율</td>
-                    <td className="py-2 font-medium">{subdivision.floor_area_ratio}</td>
-                  </tr>
                   
 
                 </tbody>
@@ -259,7 +250,6 @@ export default function House() {
             <div className="mt-6">
               <h2 className="text-lg font-bold mb-2">상세 내용</h2>
               <p>
-
               </p>
             </div>
 
@@ -285,7 +275,7 @@ export default function House() {
             
 
             <div className="mt-8">
-              <h2 className="text-lg font-bold mb-4">시행/시공/대행/신탁 정보</h2>
+              <h2 className="text-lg font-bold mb-4">시행/시공 정보</h2>
               <table className="w-full text-sm text-gray-500">
                 <tbody>
                   <tr className="border-b border-gray-100">
@@ -296,21 +286,13 @@ export default function House() {
                     <td className="py-2 text-gray-500">시공사</td>
                     <td className="py-2 font-medium">{subdivision.constructor}</td>
                   </tr>
-                  <tr className="border-b border-gray-100">
-                    <td className="py-2 text-gray-500">대행사</td>
-                    <td className="py-2 font-medium">{subdivision.agency}</td>
-                  </tr>
-                  <tr className="border-b border-gray-100">
-                    <td className="py-2 text-gray-500">신탁사</td>
-                    <td className="py-2 font-medium">{subdivision.trust_company}</td>
-                  </tr>
                 </tbody>
               </table>
             </div>
 
             <div className="flex gap-6">
-              <Link href="https://de7j3.channel.io/home" className="w-full text-center bg-orange-500 cursor-pointer hover:bg-orange-600 text-white py-3 rounded-lg mt-6 font-medium">
-                문의하기
+              <Link href="https://walla.my/v/jmGi5KblaB0pekmTaJyr" className="w-full text-center bg-blue-400 cursor-pointer hover:bg-blue-500 text-white py-3 rounded-lg mt-6 font-medium">
+                관심 고객 등록하기
               </Link>
               <button className="bg-none text-black py-2 rounded-lg mt-6 font-medium">
                 <MessageCircle className="stroke-[1.5] w-6 h-6" />

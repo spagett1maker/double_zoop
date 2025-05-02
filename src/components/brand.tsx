@@ -9,7 +9,7 @@ export default function BrandAboutSection() {
           <div className="lg:col-span-2">
             <div className="lg:sticky lg:top-24 mb-6 lg:mb-0">
               <div className="mb-4 lg:mb-6">
-                <span className="inline-block px-4 py-2 rounded-full bg-orange-100 text-orange-500 font-semibold text-sm border border-orange-100">
+                <span className="inline-block px-4 py-2 rounded-full bg-blue-100 text-blue-400 font-semibold text-sm border border-blue-100">
                   OUR STORY
                 </span>
               </div>
@@ -20,16 +20,16 @@ export default function BrandAboutSection() {
           <div className="lg:col-span-10">
             {/* Main heading with gradient */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-5 leading-tight">
-              <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent">
                 위험한 집 , 이젠 없다.
               </span>
             </h1>
 
             {/* Subheading with styled quotes - now horizontal */}
             <div className="flex flex-wrap items-center mb-8 sm:mb-12">
-              <span className="text-orange-500 text-2xl sm:text-3xl font-serif">{'"'}</span>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-medium px-2">비버의 집</h2>
-              <span className="text-orange-500 text-2xl sm:text-3xl font-serif">{'"'}</span>
+              <span className="text-blue-400 text-2xl sm:text-3xl font-serif">{'"'}</span>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-medium px-2">줍줍</h2>
+              <span className="text-blue-400 text-2xl sm:text-3xl font-serif">{'"'}</span>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-medium px-2">과 함께라면</h2>
             </div>
 
@@ -68,7 +68,7 @@ export default function BrandAboutSection() {
                 어렵고 힘들지만 어른이 된다는 건 그런 거니까요, 어른이 되느라 고생한 당신의 정착과 독립을 응원합니다!
               </p>
               <button
-                className="flex items-center text-orange-600 font-medium hover:text-orange-700 transition-colors cursor-pointer"
+                className="flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors cursor-pointer"
                 style={{
                   textShadow: "0 1px 2px rgba(249, 115, 22, 0.2)",
                 }}
