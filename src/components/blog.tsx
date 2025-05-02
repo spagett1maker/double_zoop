@@ -6,11 +6,11 @@ export default function Blog() {
   return (
     <section className='w-full mx-auto px-6 sm:px-0 max-w-[1280px] pt-[50px] pb-[50px]/'>
       <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-[32px] sm:mb-[60px]">
-        <span className='text-orange-500'>Articles</span> and Blog
+        <span className='text-blue-400'>Articles</span> and Blog
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
-        <Link href="https://acoustic-beechnut-d15.notion.site/1bd6cc418ff2803cb7acc4905b5bb4f1" className='cursor-pointer'>
+        <Link href="https://acoustic-beechnut-d15.notion.site/KA-1e56cc418ff28072a862e12b02e96585?pvs=4" className='cursor-pointer'>
         <div className="rounded-lg overflow-hidden bg-white">
           <div className="aspect-square relative overflow-hidden rounded-lg">
             <Image
@@ -22,10 +22,10 @@ export default function Blog() {
             />
           </div>
           <div className="py-4 pl-1">
-            <p className="text-sm text-gray-500 mb-2">May 9, 2024</p>
-            <h3 className="font-medium text-xl">비버처럼 성실하게, 그리고 견고하게</h3>
-            <div className='items-center flex justify-center py-[6px] px-[12px] relative bg-orange-100 max-w-max rounded-full mt-5 ml-[-2px]'>
-              <p className="text-orange-500 font-semibold text-xs">READ MORE</p>
+            <p className="text-sm text-gray-500 mb-2">Nov 9, 2024</p>
+            <h3 className="font-medium text-xl">KA 한국자산관리</h3>
+            <div className='items-center flex justify-center py-[6px] px-[12px] relative bg-blue-100 max-w-max rounded-full mt-5 ml-[-2px]'>
+              <p className="text-blue-500 font-semibold text-xs">READ MORE</p>
             </div>
           </div>
         </div>
@@ -43,10 +43,10 @@ export default function Blog() {
             />
           </div>
           <div className="py-4 pl-1">
-            <p className="text-sm text-gray-500 mb-2">May 9, 2024</p>
+            <p className="text-sm text-gray-500 mb-2">May 2, 2025</p>
             <h3 className="font-medium text-xl">전세사기 특별법이 만료된다면?</h3>
-            <div className='items-center flex justify-center py-[6px] px-[12px] relative bg-orange-100 max-w-max rounded-full mt-5 ml-[-2px]'>
-              <p className="text-orange-500 font-semibold text-xs">READ MORE</p>
+            <div className='items-center flex justify-center py-[6px] px-[12px] relative bg-blue-100 max-w-max rounded-full mt-5 ml-[-2px]'>
+              <p className="text-blue-500 font-semibold text-xs">READ MORE</p>
             </div>
           </div>
         </div>
@@ -64,10 +64,10 @@ export default function Blog() {
             />
           </div>
           <div className="py-4 pl-1">
-            <p className="text-sm text-gray-500 mb-2">May 9, 2024</p>
+            <p className="text-sm text-gray-500 mb-2">FEB 9, 2025</p>
             <h3 className="font-medium text-xl">전세 보증금 반환 보증 HUG, HF, SGI 차이</h3>
-            <div className='items-center flex justify-center py-[6px] px-[12px] relative bg-orange-100 max-w-max rounded-full mt-5 ml-[-2px]'>
-              <p className="text-orange-500 font-semibold text-xs">READ MORE</p>
+            <div className='items-center flex justify-center py-[6px] px-[12px] relative bg-blue-100 max-w-max rounded-full mt-5 ml-[-2px]'>
+              <p className="text-blue-500 font-semibold text-xs">READ MORE</p>
             </div>
           </div>
         </div>

@@ -14,7 +14,7 @@ import { Subdivision } from '@/types/type';
 export default function Home() {
   const [majorRegion, setMajorRegion] = useState("서울")
   const [subRegion, setSubRegion] = useState("강남/서초")
-  const [showAllSubRegions, setShowAllSubRegions] = useState(false)
+  const [showAllSubRegions, setShowAllSubRegions] = useState(true)
   const [subdivisions, setSubdivisions] = useState<Subdivision[]>([]);
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null);
@@ -36,7 +36,63 @@ export default function Home() {
       "종로/중구/용산",
       "성북/강북/도봉/노원",
       "동대문/성동/중랑/광진",
+      " 기타 "
     ],
+    경기:
+    [
+      "성남/분당/과천",
+      "용인/수원/화성/동탄",
+      "부천/광명/안양",
+      "구리/하남",
+      "김포/고양/일산",
+      "평택/안성/오산",
+      "시흥/안산/군포/의왕",
+      "이천/여주",
+      "광주/남양주/의정부",
+      "양평/가평/포천/연천/동두천",
+      "파주/양주",
+      " 기타 "
+    ],
+    인천:
+    [
+      "연수/송도",
+      "서구/검단",
+      "부평/계양",
+      "남동/미추홀", 
+      "중구/동구/옹진",
+      "강화/갑곶"
+    ],
+
+    강원: [
+      "춘천",
+      "속초/강릉",
+      "동해/삼척/태백"
+    ],
+
+    충청: [
+      "천안/아산",
+      "대전/세종/공주",
+      "청주/충주",
+    ],
+
+    경상: [
+      "부산/창원/김해",
+      "울산/양산/경주",
+      "포항/영덕",
+      "대구/경산",
+    ],
+
+    전라: [
+      "광주",
+      "전주",
+      "순천/여수",
+    ],
+
+    제주: [
+      "제주/애월",
+      "서귀포",
+    ],
+
   }
 
   // // Fetch properties when region changes

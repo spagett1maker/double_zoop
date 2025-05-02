@@ -10,12 +10,12 @@ export default function Footer() {
           <div className="sm:col-span-2 md:col-span-5">
             <p className="text-sm mb-3">Contact</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight mb-2">
-              <span className="text-orange-500">ZOOP</span> ZOOP
+              <span className="text-blue-400">ZOOP</span> ZOOP
             </h2>
-            <p className="text-sm text-gray-700 mb-6 sm:mb-10">아파트 분양 정보는 &apos;줍줍&apos;</p>
+            <p className="text-sm text-gray-700 mb-6 sm:mb-10">아파트 청약 정보는 &apos;줍줍&apos;</p>
             <Link
-              href="https://de7j3.channel.io/home"
-              className="inline-flex items-center text-white bg-orange-500 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 font-medium transition-colors hover:bg-orange-600 active:bg-orange-700"
+              href="https://zoopzoop.channel.io/home"
+              className="inline-flex items-center text-white bg-blue-400 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 font-medium transition-colors hover:bg-blue-500 active:bg-blue-600"
             >
               Let&apos;s talk
               <ArrowUpRight className="ml-2 h-4 w-4" />
@@ -37,7 +37,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/https://de7j3.channel.io/home" className="hover:underline underline-offset-4 inline-block py-1">
+                <Link href="https://zoopzoop.channel.io/home" className="hover:underline underline-offset-4 inline-block py-1">
                   문의하기
                 </Link>
               </li>
@@ -82,12 +82,12 @@ export default function Footer() {
                   {/* <p>통신판매업 신고번호: -</p> */}
                 </div>
                 <div className="space-y-1">
-                  <p>사업장 소재지 주소: 경기도 용인시 수지구 만현로</p>
+                  <p>사업장 소재지 주소: 서울특별시 강남구 역삼로 172 마루360 5층</p>
                   <p>전화번호: 0504-0810-8746</p>
                   <p>
                     이메일:{" "}
-                    <a href="mailto:contact@beavershouse.com" className="hover:underline">
-                      contact@beavershouse.com
+                    <a href="mailto:contact@zoopzoop.homes" className="hover:underline">
+                      contact@zoopzoop.homes
                     </a>
                   </p>
                 </div>
@@ -99,7 +99,7 @@ export default function Footer() {
 
         {/* Copyright and Terms */}
         <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200 text-xs sm:text-sm flex flex-col sm:flex-row justify-between gap-4">
-          <p>&copy; {new Date().getFullYear()} Beaver&apos;s House. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} ZOOPZOOP. All rights reserved.</p>
           <div className="flex flex-wrap gap-4">
             <Link href="/policy/terms" className="hover:underline underline-offset-2">
               이용약관

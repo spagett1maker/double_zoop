@@ -5,18 +5,19 @@ export default function HeroSection() {
     <div className="w-full max-w-7xl mx-auto px-6 sm:px-4 pt-32 pb-12 flex flex-col items-center">
       {/* Badge */}
       <div className="mb-6">
-        <span className="inline-block px-4 py-1 rounded-full bg-orange-50 text-orange-500 text-sm font-medium">
-          Beaver&apos;s House | 비버의 집
+        <span className="inline-block px-4 py-1 rounded-full bg-blue-50 text-blue-500 text-sm font-medium">
+          ZOOP ZOOP | 아파트 청약정보는 줍줍
         </span>
       </div>
 
       {/* Heading */}
       <h1 className="text-3xl sm:text-5xl leading-snug font-bold text-center mb-12 max-w-4xl">
-        아직 세상이 쉽지만은 않은,
+        내집마련 , 
         <br className="" />
-        어른이들을 위한 안전한 집, 
+        이젠 꿈이 아닌
         <br className="block sm:hidden" />
-        <span className="text-orange-500">비버의 집</span>
+        <span className="text-blue-400"> 현실</span>
+        <span className="">입니다.</span>
       </h1>
 
       {/* Image */}
