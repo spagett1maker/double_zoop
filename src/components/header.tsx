@@ -115,8 +115,8 @@ export default function Header() {
             <Link href="/service" className="">
               <p className="hover:font-semibold">KA 한국자산관리</p>
             </Link>
-            <Link href="https://zoopzoop.channel.io/home" className="">
-              <p className="hover:font-semibold">문의하기</p>
+            <Link href="https://walla.my/v/K9IViOO4mtIYwEBNvZ8h" className="">
+              <p className="hover:font-semibold">광고 문의하기</p>
             </Link>
           </nav>
           <div className="hidden md:flex items-center">
@@ -132,9 +132,9 @@ export default function Header() {
                 로그인 
               </Link>
             )}
-            <button onClick={handleDownloadClick} className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md px-4 py-2 text-sm transition-colors ease-in-out cursor-pointer">
-              광고 문의하기
-            </button>
+            <Link href="https://walla.my/v/jmGi5KblaB0pekmTaJyr" onClick={handleDownloadClick} className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md px-4 py-2 text-sm transition-colors ease-in-out cursor-pointer">
+              청약 알림받기
+            </Link>
           </div>
 
           {/* Mobile Menu Button and Download Button */}
