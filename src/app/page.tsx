@@ -263,7 +263,7 @@ export default function Home() {
 
             <div className="md:sticky overflow-hidden p-4 md:p-0 rounded-xl">
               {/* Region Filter */}
-              <div className="flex flex-col md:flex-row rounded-xl shadow-md overflow-hidden sm:h-[384px]">
+              <div className="flex flex-col min-h-0 md:flex-row rounded-xl shadow-md overflow-hidden/ sm:h-[384px]">
                 {/* Major Regions */}
                 <div className="w-full md:w-1/3 h-full">
                   {majorRegions.map((region, index) => (
@@ -280,7 +280,7 @@ export default function Home() {
                 </div>
 
                 {/* Sub Regions */}
-                <div className="w-full md:w-2/3 bg-white h-full border-[1.5] border-gray-50">
+                <div className="w-full min-h-0 md:w-2/3 bg-white h-full border-[1.5] border-gray-50 overflow-hidden">
                   <div className="flex justify-between items-center py-2.5 px-4 border-b border-gray-100">
                     <span className="text-lg font-medium">{majorRegion}</span>
                     <button
@@ -290,7 +290,7 @@ export default function Home() {
                       전체 <ChevronRight className="h-4 w-4 ml-1" />
                     </button>
                   </div>
-                  <div className="max-h-[300px] sm:max-h-[384px] overflow-y-auto">
+                  <div className="max-h-[300px] sm:max-h-[336px] overflow-y-auto">
                     {subRegionsMap[majorRegion]?.map((region) => (
                       <button
                         key={region}
