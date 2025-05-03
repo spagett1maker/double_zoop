@@ -66,13 +66,9 @@ export function HouseCard({ house }: { house: Subdivision }) {
               {/* <House className="w-4 h-4 text-[#f37021]" /> 전매제한 */} 전매제한
             </div>
           )}
-          {house.tags?.[2] ? (
+          {house.tags?.[2] && (
             <div className="flex items-center gap-1 text-[12px] bg-[#e7f9f3] text-[#068C6D] font-medium rounded-lg py-1 px-2">
-              {/* <House className="w-4 h-4 text-[#068C6D]" /> 다주택 가능 */} 다주택 가능
-            </div>
-          ) : (
-            <div className="flex items-center gap-1 text-[12px] bg-[#ffddc8] text-[#f37021] font-medium rounded-lg py-1 px-2">
-              {/* <House className="w-4 h-4 text-[#f37021]" /> 다주택 불가능 */} 다주택 불가능
+              {/* <House className="w-4 h-4 text-[#068C6D]" /> 다주택 가능 */} 분양가 상한제
             </div>
           )}
         </div>
