@@ -106,7 +106,7 @@ export default function Header() {
             <p className="text-xl sm:text-2xl font-bold">
               <span className="text-orange-500">ZOOP</span> ZOOP
             </p>
-            <p className="text-sm text-gray-500">아파트 분양 정보는 &apos;줍줍&apos;</p>
+            <p className="text-sm text-gray-500">아파트 청약 정보는 &apos;줍줍&apos;</p>
           </Link>
           
         </div>
