@@ -309,8 +309,8 @@ export default function House() {
             </div>
 
             <div className="flex gap-6">
-              <Link href="https://de7j3.channel.io/home" className="w-full text-center bg-orange-500 cursor-pointer hover:bg-orange-600 text-white py-3 rounded-lg mt-6 font-medium">
-                문의하기
+              <Link href="https://walla.my/v/jmGi5KblaB0pekmTaJyr" className="w-full text-center bg-orange-500 cursor-pointer hover:bg-orange-600 text-white py-3 rounded-lg mt-6 font-medium">
+                관심 고객 등록하기
               </Link>
               <button className="bg-none text-black py-2 rounded-lg mt-6 font-medium">
                 <MessageCircle className="stroke-[1.5] w-6 h-6" />
