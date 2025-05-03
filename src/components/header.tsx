@@ -13,38 +13,38 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
 
-  const handleDownloadClick = () => {
-    setIsOpen(true)
+  // const handleDownloadClick = () => {
+  //   setIsOpen(true)
 
-    // Track the click event
-    trackDownloadClick()
+  //   // Track the click event
+  //   trackDownloadClick()
 
-    // Simulate preparation process
-    setTimeout(() => {
-      // After preparation is complete, you could:
-      // 1. Close the modal
-      // 2. Redirect to download page
-      // 3. Start the download
-      setIsOpen(false)
-    }, 3000)
-  }
+  //   // Simulate preparation process
+  //   setTimeout(() => {
+  //     // After preparation is complete, you could:
+  //     // 1. Close the modal
+  //     // 2. Redirect to download page
+  //     // 3. Start the download
+  //     setIsOpen(false)
+  //   }, 3000)
+  // }
 
-  const trackDownloadClick = () => {
-    // This function would implement your tracking logic
-    // For example:
-    const userId = localStorage.getItem("userId") || "anonymous"
-    const timestamp = new Date().toISOString()
+  // const trackDownloadClick = () => {
+  //   // This function would implement your tracking logic
+  //   // For example:
+  //   const userId = localStorage.getItem("userId") || "anonymous"
+  //   const timestamp = new Date().toISOString()
 
-    console.log(`Download clicked by ${userId} at ${timestamp}`)
+  //   console.log(`Download clicked by ${userId} at ${timestamp}`)
 
-    // In a real application, you would send this data to your analytics service
-    // Example:
-    // fetch('/api/track-download', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ userId, timestamp }),
-    //   headers: { 'Content-Type': 'application/json' }
-    // })
-  }
+  //   // In a real application, you would send this data to your analytics service
+  //   // Example:
+  //   // fetch('/api/track-download', {
+  //   //   method: 'POST',
+  //   //   body: JSON.stringify({ userId, timestamp }),
+  //   //   headers: { 'Content-Type': 'application/json' }
+  //   // })
+  // }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -132,19 +132,19 @@ export default function Header() {
                 로그인 
               </Link>
             )}
-            <Link href="https://walla.my/v/jmGi5KblaB0pekmTaJyr" onClick={handleDownloadClick} className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md px-4 py-2 text-sm transition-colors ease-in-out cursor-pointer">
+            <Link href="https://walla.my/v/jmGi5KblaB0pekmTaJyr" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md px-4 py-2 text-sm transition-colors ease-in-out cursor-pointer">
               청약 알림받기
             </Link>
           </div>
 
           {/* Mobile Menu Button and Download Button */}
           <div className="md:hidden flex items-center gap-2">
-            <button
-              onClick={handleDownloadClick}
+            <Link
+              href="https://walla.my/v/jmGi5KblaB0pekmTaJyr"
               className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md px-3 py-1.5 text-sm transition-colors ease-in-out cursor-pointer"
             >
-              앱 다운로드
-            </button>
+              청약 알림받기
+            </Link>
 
             <button
               id="menu-button"
@@ -211,11 +211,11 @@ export default function Header() {
                   서비스 소개
                 </Link>
                 <Link
-                  href="https://de7j3.channel.io/home"
+                  href="https://walla.my/v/K9IViOO4mtIYwEBNvZ8h"
                   className="hover:text-orange-500 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  문의하기
+                  광고 문의하기
                 </Link>
               </nav>
               <div className="mt-auto">

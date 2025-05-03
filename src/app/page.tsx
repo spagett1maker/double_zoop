@@ -309,7 +309,7 @@ export default function Home() {
 
             {/** 매물 업로드 버튼 */}
             <div className="relative mt-6 hidden md:block h-[100px] w-full overflow-hidden rounded-lg group mb-1">
-              <Link href="https://walla.my/survey/BQ5vA9Nl7SPhwMu7RA9p" className="absolute inset-0 z-30" />
+              <Link href="https://walla.my/v/K9IViOO4mtIYwEBNvZ8h" className="absolute inset-0 z-30" />
               <Image 
                 src="/side_upload.png"
                 alt="side"
@@ -318,22 +318,7 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-black opacity-50 z-10 rounded-lg" />
               <div className="absolute inset-0 z-20 flex items-center justify-center">
-                <p className="text-white text-base font-semibold">분양 상담사 문의</p>
-              </div>
-            </div>
-
-            {/** 안심 매물 받기 버튼 */}
-            <div className="relative mt-3 hidden md:block h-[100px] w-full overflow-hidden rounded-lg group mb-3">
-              <Link href="https://walla.my/survey/BQ5vA9Nl7SPhwMu7RA9p" className="absolute inset-0 z-30" />
-              <Image 
-                src="/side_upload2.jpg"
-                alt="side"
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
-              />
-              <div className="absolute inset-0 bg-black opacity-50 z-10 rounded-lg" />
-              <div className="absolute inset-0 z-20 flex items-center justify-center">
-                <p className="text-white text-base font-semibold">분양 대행사 광고 문의</p>
+                <p className="text-white text-base font-semibold">분양 광고문의</p>
               </div>
             </div>
             
@@ -343,7 +328,7 @@ export default function Home() {
           <div className="flex-1 mt-6 md:mt-0 pb-8">
             {/* Mobile Upload Button */}
             <div className="md:hidden relative h-[100px] w-full overflow-hidden rounded-lg group mb-3">
-              <Link href="https://walla.my/survey/BQ5vA9Nl7SPhwMu7RA9p" className="absolute inset-0 z-30" />
+              <Link href="https://walla.my/v/K9IViOO4mtIYwEBNvZ8h" className="absolute inset-0 z-30" />
               <Image 
                 src="/side_upload.png"
                 alt="side"
@@ -352,25 +337,10 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-black opacity-50 z-10 rounded-lg" />
               <div className="absolute inset-0 z-20 flex items-center justify-center">
-                <p className="text-white text-base font-semibold">분양 상담사 문의</p>
+                <p className="text-white text-base font-semibold">분양 광고 문의</p>
               </div>
             </div>
-
-            {/** 모바일 안심매물 받기 버튼 */}
-            <div className="md:hidden relative h-[100px] w-full overflow-hidden rounded-lg group mb-3">
-              <Link href="https://walla.my/survey/BQ5vA9Nl7SPhwMu7RA9p" className="absolute inset-0 z-30" />
-              <Image 
-                src="/side_upload2.jpg"
-                alt="side"
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
-              />
-              <div className="absolute inset-0 bg-black opacity-50 z-10 rounded-lg" />
-              <div className="absolute inset-0 z-20 flex items-center justify-center">
-                <p className="text-white text-base font-semibold">분양 대행사 광고 문의</p>
-              </div>
-            </div>
-
+            
             {loading ? (
               <div className="flex justify-center items-center h-64">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
