@@ -115,7 +115,7 @@ export default function Header() {
             <Link href="/service" className="">
               <p className="hover:font-semibold">KA 한국자산관리</p>
             </Link>
-            <Link href="https://de7j3.channel.io/home" className="">
+            <Link href="https://zoopzoop.channel.io/home" className="">
               <p className="hover:font-semibold">문의하기</p>
             </Link>
           </nav>

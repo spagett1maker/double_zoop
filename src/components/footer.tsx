@@ -14,7 +14,7 @@ export default function Footer() {
             </h2>
             <p className="text-sm text-gray-700 mb-6 sm:mb-10">아파트 분양 정보는 &apos;줍줍&apos;</p>
             <Link
-              href="https://de7j3.channel.io/home"
+              href="https://zoopzoop.channel.io/home"
               className="inline-flex items-center text-white bg-orange-500 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 font-medium transition-colors hover:bg-orange-600 active:bg-orange-700"
             >
               Let&apos;s talk
@@ -37,7 +37,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/https://de7j3.channel.io/home" className="hover:underline underline-offset-4 inline-block py-1">
+                <Link href="https://zoopzoop.channel.io/home" className="hover:underline underline-offset-4 inline-block py-1">
                   문의하기
                 </Link>
               </li>
